@@ -209,7 +209,7 @@
             class="h-screen w-screen bg-opacity-30 bg-black  absolute z-50 flex justify-center items-center">
             <div @click="AddVehiculeTap = !AddVehiculeTap" class="h-full w-full  absolute"></div>
             <div
-               class="w-6/12 h-[95%] bg-white  rounded-lg mx-auto p-8  space-y-3 z-50 flex flex-col ">
+               class="w-6/12  bg-white  rounded-lg mx-auto p-8  space-y-3 z-50 flex flex-col ">
                <form @submit.prevent="SaveVehicule" class=" space-y-3">
                   <div class="border-b border-gray-900/10 ">
                         <h2 class="text-base font-semibold leading-7 text-gray-900">Enregister un vehicule</h2>

@@ -213,7 +213,7 @@
                         <span class="flex items-center text-brand-500 dark:text-white">
                         <svg
                             stroke="currentColor"
-                            fill="currentColor"
+                            fill="#02356A"
                             stroke-width="0"
                             viewBox="0 0 512 512"
                             class="h-6 w-6"
@@ -240,8 +240,8 @@
                     <div class="rounded-full bg-lightPrimary p-3 dark:bg-navy-700">
                         <span class="flex items-center text-brand-500 dark:text-white">
                         <svg
-                            stroke="currentColor"
-                            fill="currentColor"
+                            stroke="#02356A"
+                            fill="#02356A"
                             stroke-width="0"
                             viewBox="0 0 512 512"
                             class="h-6 w-6"

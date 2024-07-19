@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="px-4">
         <div class="w-11/12 h-12 -mt-6 flex space-x-1 items-center">
             <button @click="this.$router.back()">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
@@ -10,39 +10,25 @@
                 retour
             </span>
         </div>  
-        <div class="w-full h-52 pt-2 grid grid-cols-3">
-            <div class=" h-full w-full col-span-2 px-3">
-                <div class="flex space-x-2  items-center">
-                    <div class="text-lg font-semibold">
-                        <span>Douala</span>
+        <div class="w-full h-52 pt-2  grid grid-cols-3">
+            <div class="col-span-2 h-full  space-y-3">
+                    <div class="text-3xl font-semibold">
+                        <p>Gatineau A Montreal</p>
                     </div>
-                    <span>à</span>
-                    <div class="text-lg font-semibold">
-                        <span>Douala</span>
+                    <div class="text-lg font-semibold text-gray-500">
+                        <p>Date de depart mardi 16 juillet a 02h800</p>
                     </div>
-                </div>
-                <div>
-                    <span>date de depart: </span>
-                    <span>02/02/2001</span>
-                </div>
+                    <div>
+                        <p class="text-lg font-semibold">Depart: <span>Gatineau,QC,Canada</span></p>
+                        <p class="text-lg font-semibold">Arrivee: <span>Gatineau,QC,Canada</span></p>
+                    </div>
 
-                <div>
-                   <div>
-                        <p>detail de trajet</p>
-                   </div>
-                   <div>
-                        <div class="flex space-x-2">
-                            <span>Départ: </span>
-                            <span>02/02/2001</span>
-                        </div>
-                        <div class="flex space-x-2">
-                            <span>Arrivée: </span>
-                            <span>02/02/2001</span>
-                        </div>
-                   </div>
-                </div>
+                    <div class="flex space-x-3 items-center">
+                        <p>1 place libre</p>
+                        <span class="w-2 h-2 rounded-full bg-[#02356A]"></span>
+                        <p class="text-[#02356A] font-semibold">25 FCFA par places</p>
+                    </div>
             </div>
-            <div class="bg-blue-200 h-full w-full col-span-1"></div>
         </div>
     </div>
 </template>

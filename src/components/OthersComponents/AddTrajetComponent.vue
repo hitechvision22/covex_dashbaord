@@ -3,7 +3,7 @@
         <div class="flex items-center justify-center px-12">
 
             <div class="mx-auto w-full bg-white">
-                <form class="space-y-5">
+                <form @submit.prevent="AddTrajet" class="space-y-5">
                     <div class="text-2xl font-semibold">
                         <p>Ajouter un trajet de co-voiturage</p>
                     </div>
@@ -17,14 +17,14 @@
                                 class="w-full font-semibold border-l-4 placeholder:capitalize placeholder:font-normal border-[#02356A] outline-none shadow focus:shadow-lg duration-700  h-full px-4 text-md " />
                         </div>
                         <div class="w-full px-3 h-14">
-                            <input type="text" name="fName" id="fName" required v-model="form.point_destination" placeholder="ville de destination"
+                            <input type="text" name="fName" id="fName" required v-model="form.ville_destination" placeholder="ville de destination"
                                 class="w-full font-semibold border-l-4 placeholder:capitalize placeholder:font-normal border-[#02356A] outline-none shadow focus:shadow-lg duration-700  h-full px-4 text-md " />
                         </div>
                     </div>
 
                     <div class="-mx-3 grid grid-cols-3 w-full ">
                         <div class="w-full px-3 h-14">
-                            <input type="text" name="fName" id="fName" required placeholder="point de d'arrivee ex: tradex yassa"
+                            <input type="text" name="fName" id="fName" required v-model="form.point_destination" placeholder="point de d'arrivee ex: tradex yassa"
                                 class="w-full font-semibold border-l-4 placeholder:capitalize placeholder:font-normal border-[#02356A] outline-none shadow focus:shadow-lg duration-700  h-full px-4 text-md " />
                         </div>
                         <div class="w-full px-3 h-14">
@@ -101,9 +101,9 @@
                         </div>
                     </div>
 
-                    <div class="flex justify-end">
-                        <button
-                            class="hover:shadow-form rounded-md bg-[#07074D] py-3 px-8 text-center text-base font-semibold text-white outline-none">
+                    <div class="flex  justify-end">
+                        <button type="submit"
+                            class="hover:shadow-form rounded-md bg-[#02356A] py-3 px-8 text-center text-base font-semibold text-white outline-none">
                             Enregistrer et Poster
                         </button>
                     </div>
@@ -144,8 +144,9 @@ export default {
         data.append("heure_depart",this.form.heure_depart)
         data.append("prix",this.form.prix)
         data.append("nombre_de_place",this.form.nombre_de_place)
-        data.append("bagage",this.form.bagage=='on'? true:false)
-        data.append("Mode_de_paiement",this.form.Mode_de_paiement=='on'? true:false)
+        data.append("etat",'actif')
+        data.append("bagage",this.form.bagage=='on'? 1:0)
+        data.append("Mode_de_paiement",this.form.Mode_de_paiement=='on'? 1:0)
         this.axios.post(this.$store.state.api + "trajet",data, this.$store.state.config)
             .then(({ data }) => {
                 window.emitter.emit("loading",false)
