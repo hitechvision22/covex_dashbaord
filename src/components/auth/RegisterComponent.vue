@@ -55,12 +55,12 @@
                                 <p>Covoiturage Express</p>
                             </div>
                             <div class="text-center text-md lg:text-lg text-slate-400 font-['poppins']">
-                                <p>Veuillez vous connecter sur votre compte</p>
+                                <p>bienvenue parmi nous, Veuillez creer votre compte</p>
                             </div>
                             <form @submit.prevent="login" class="w-11/12 lg:w-10/12 mx-auto pt-6 space-y-5">
 
                                 <div class="w-full h-11 bg-white ">
-                                    <input type="email" v-model="form.name" required
+                                    <input type="text" v-model="form.name" required
                                         class="w-full font-semibold border-l-4 placeholder:capitalize placeholder:font-normal border-[#02356A] outline-none shadow focus:shadow-lg duration-700  h-full px-4 text-md "
                                         placeholder="john dow">
                                 </div>

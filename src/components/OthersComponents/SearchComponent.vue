@@ -58,7 +58,7 @@
             <div class="flex space-x-2 flex-wrap justify-center">
                 <router-link 
                 :to="{ name: 'detail', query: { id: item.id, ville_depart: item.ville_depart,heure_depart:item.heure_depart, ville_destination: item.ville_destination,prix:item.prix} }"
-                  v-for="item in results" :key="item.id" class=" w-[34%] bg-white duration-500 border hover:border-[#02356A] hover:shadow-lg rounded p-3 ">
+                  v-for="item in results" :key="item.id" class=" w-[34%] bg-white duration-500 border hover:border-[#02356A] hover:shadow-lg rounded p-3 m-2">
                     <div class="flex justify-between items-center w-full">
                         <div>
                             <div class="text-lg ">
@@ -124,9 +124,9 @@ export default {
         search() {
             this.SearchLoading = true
             let data = new FormData();
-            data.append("ville_depart",this.form.ville_depart)
+           if(this.form.ville_depart.length > 0) data.append("ville_depart",this.form.ville_depart)
             data.append("ville_destination",this.form.ville_destination)
-            data.append("date_depart",this.form.date_depart)
+            if(this.form.date_depart.length > 0) data.append("date_depart",this.form.date_depart)
             this.axios.post(this.$store.state.api+"search",data)
             .then(({data})=>{
                 this.SearchLoading = false
