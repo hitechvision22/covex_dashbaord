@@ -204,6 +204,55 @@
                </div>
             </div>
          </div>
+         <div v-if="TransactionEffec" class="h-screen w-screen absolute z-[400] flex justify-center items-center">
+            <div class="w-full h-full bg-black bg-opacity-30 absolute"></div>
+            <div class="bg-white p-6 rounded-lg shadow-lg text-center w-full max-w-md z-50">
+               <div class="flex justify-center mb-4">
+                     <div class="bg-green-100 rounded-full p-4">
+                        <i class="fas fa-check-circle text-green-500 text-4xl"></i>
+                     </div>
+               </div>
+               <h2 class="text-2xl font-bold text-gray-800 mb-4">Reservation Acceptée!</h2>
+               <p class="text-gray-600 mb-4">Votre transaction a été effectuée avec succès.</p>
+               
+               <button class="bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                     fermer
+               </button>
+            </div>
+
+         </div>
+
+         <div v-if="payerTap" class="w-full h-full bg-black absolute bg-opacity-50 z-[10000] flex justify-center items-center">
+            <div @click="payerTap = !payerTap" class="h-full w-full  absolute"></div>
+            <div class="bg-white p-6 rounded-lg shadow-lg w-4/12 flex flex-col justify-center items-center z-50">
+                  <div class="w-full">
+                     <h2 class="text-2xl font-bold text-gray-800 mb-4">Résumé de la transaction</h2>
+                  </div>
+                  <div class="mb-4 w-full">
+                     <p class="text-lg font-medium text-gray-700">Prix total :</p>
+                     <p class="text-xl font-bold text-[#02356A]">{{ price + this.$store.state.montantFrais }} XAF</p>
+                  </div>
+                  <div class="mb-4 w-full">
+                     <label for="payer-number" class="block text-lg font-medium text-gray-700 mb-2">Numéro du payeur :</label>
+                     <input 
+                     type="text" 
+                     id="payer-number" 
+                     v-model="payerNumber" 
+                     placeholder="Entrez le numéro du payeur" 
+                     class="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none "
+                     >
+                  </div>
+                  <svg class="svg" v-if="payerLoading" viewBox="25 25 50 50">
+                     <circle r="20" cy="50" cx="50"></circle>
+                  </svg>
+                  <button v-else
+                     @click="submitPayment" 
+                     class="bg-[#02356A] text-white border border-[#02356A] rounded-md px-4 py-2 w-full hover:bg-[#02356A] focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  >Soumettre
+                  </button>
+                  
+               </div>
+         </div>
 
          <div v-if="AddVehiculeTap"
             class="h-screen w-screen bg-opacity-30 bg-black  absolute z-50 flex justify-center items-center">
@@ -949,6 +998,7 @@ export default {
       window.emitter.off("DetailTrans")
       window.emitter.off("ShowProfile")
       window.emitter.off("FormVehicule")
+      window.emitter.off("showpayertap")
    },
    async mounted() {
 
@@ -1015,6 +1065,15 @@ console.log(inactivityDuration);
       window.emitter.on("DetailTrans", (data) => {
          this.DetailTransaction = true
          this.transaction = data
+      })
+
+      window.emitter.on("showpayertap",(data)=>{
+         this.price = data[0].prix * data[1]
+         this.payerTap = true
+         this.nbrPlace = data[1]
+         this.datas = data
+
+         console.log(this.datas[0])
       })
 
       window.emitter.on("Vehicule", (data) => {
@@ -1123,11 +1182,44 @@ console.log(inactivityDuration);
             nombre_portes:0,
             etat:"",
             nombre_places:0
-         }
+         },
+         price: 99.99,
+         payerNumber: '',
+         payerLoading:false,
+         payerTap:false,
+         datas:"",
+         TransactionEffec:false
       }
    },
 
    methods: {
+
+    
+
+      submitPayment() {
+      if (this.payerNumber.trim() === '' || this.payerNumber.trim().length > 9) {
+        alert('Veuillez entrer le numéro du payeur.');
+      } else {
+
+         this.payerLoading = true
+         // payement...
+        let data = new FormData();
+        data.append('nbr_place', this.datas[1])
+        data.append('trajet_id',this.datas[0].id)
+        data.append('methode',this.datas[0].Mode_de_paiement)
+        data.append("montant",this.price)
+        this.axios.post(this.$store.state.api + "reservation",data, this.$store.state.config)
+            .then(({ data }) => {
+               this.payerLoading = false
+               console.log(data)
+               this.TransactionEffec = true
+            }).catch(error => {
+               this.payerLoading = false
+               console.log(error)
+            })
+
+      }
+    },
 
       GetPiece(){
          this.index = 0
@@ -1451,6 +1543,48 @@ console.log(inactivityDuration);
       transform: translateY(66%) scale(0.65);
       opacity: 0.8;
    }
+}
+
+
+
+
+
+.svg {
+ width: 2.5em;
+ transform-origin: center;
+ animation: rotate4 2s linear infinite;
+}
+
+circle {
+ fill: none;
+ stroke: #02356A;
+ stroke-width: 2;
+ stroke-dasharray: 1, 200;
+ stroke-dashoffset: 0;
+ stroke-linecap: round;
+ animation: dash4 1.5s ease-in-out infinite;
+}
+
+@keyframes rotate4 {
+ 100% {
+  transform: rotate(360deg);
+ }
+}
+
+@keyframes dash4 {
+ 0% {
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+ }
+
+ 50% {
+  stroke-dasharray: 90, 200;
+  stroke-dashoffset: -35px;
+ }
+
+ 100% {
+  stroke-dashoffset: -125px;
+ }
 }
 
 
