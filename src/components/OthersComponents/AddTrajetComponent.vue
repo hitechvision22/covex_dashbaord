@@ -1,5 +1,16 @@
 <template>
-    <div>
+    <div class="overflow-hidden">
+        <div v-if="alertTap" class="h-[85vh] w-[80%]  absolute bg-opacity-40 -mt-5 flex justify-center items-center ">
+            <div class="h-full w-full backdrop-blur-md bg-black bg-opacity-25 absolute"></div>
+            <div class="max-w-md w-full bg-white rounded-lg shadow-md p-6 text-center absolute">
+                <svg class="w-16 h-16 mx-auto text-yellow-400 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.293-3.293a1 1 0 00-1.414 1.414L5.586 12l-1.293 1.293a1 1 0 001.414 1.414L7 13.414l1.293 1.293a1 1 0 001.414-1.414L8.414 12l1.293-1.293a1 1 0 00-1.414-1.414L7 10.586 5.707 9.293z" />
+                </svg>
+                <h1 class="text-2xl font-semibold text-gray-800 mb-4">Aucune véhicule enregistrée</h1>
+                <p class="text-gray-600 mb-6">Pour poursuivre le processus d'enregistrement, veuillez l'enregistrer.</p>
+                <button @click="AddVehicule" href="#" class="text-blue-500 hover:underline">enregistrer mon vehicule</button>
+            </div>
+        </div>
         <div class="flex items-center justify-center px-12">
 
             <div class="mx-auto w-full bg-white">
@@ -51,7 +62,7 @@
                     <div class="space-x-7">
                         <div class="flex space-x-3 items-center">
                             <span class="w-4 h-4 bg-[#02356A] rounded-full"></span>
-                            <label class="mb-3 block text-base font-medium text-[#07074D]">
+                            <label class="mb-3 block text-base font-medium text-[#02356A]">
                                 Accessoire de voyage
                                 <div class="text-sm text-slate-400">
                                         les clients de ce trajet ont-il la possibilite de venir avec des bagages?
@@ -61,14 +72,14 @@
                         
                         <div class="flex items-center space-x-6">
                             <div class="flex items-center">
-                                <input type="radio"   @change="handleRadioBagage" required name="radio1" id="radioButton1" class="h-5 w-5 accent-[#07074D] " />
-                                <label for="radioButton1"  class="pl-3 text-base font-medium text-[#07074D]">
+                                <input type="radio"   @change="handleRadioBagage" required name="radio1" id="radioButton1" class="h-5 w-5 accent-[#02356A] " />
+                                <label for="radioButton1"  class="pl-3 text-base font-medium text-[#02356A]">
                                     j'accepte les bagages !!!
                                 </label>
                             </div>
                             <div class="flex items-center">
-                                <input type="radio" @change="handleRadioBagage" required name="radio1" id="radioButton2" class="h-5 w-5 accent-[#07074D]" />
-                                <label for="radioButton2" class="pl-3 text-base font-medium ">
+                                <input type="radio" @change="handleRadioBagage" required name="radio1" id="radioButton2" class="h-5 w-5 accent-[#02356A]" />
+                                <label for="radioButton2" class="pl-3 text-base font-medium text-[#02356A]">
                                     non, j'en veux pas !!!
                                 </label>
                             </div>
@@ -78,7 +89,7 @@
                     <div class="space-x-7">
                         <div class="flex space-x-3 items-center">
                             <span class="w-4 h-4 bg-[#02356A] rounded-full"></span>
-                            <label class="mb-3 block text-base font-medium text-[#07074D]">
+                            <label class="mb-3 block text-base font-medium text-[#02356A]">
                                 mode de paiement
                                 <div class="text-sm text-slate-400">
                                     Les reservations de ce trajet seront t'il?
@@ -87,14 +98,14 @@
                         </div>
                         <div class="flex items-center space-x-6">
                             <div class="flex items-center">
-                                <input type="radio" @change="handleRadioMethode" required name="radio2" id="radioButton1" class="h-5 w-5 accent-[#07074D]" />
-                                <label for="radioButton1" class="pl-3 text-base font-medium text-[#07074D]">
+                                <input type="radio" @change="handleRadioMethode" required name="radio2" id="radioButton1" class="h-5 w-5 accent-[#02356A]" />
+                                <label for="radioButton1" class="pl-3 text-base font-medium text-[#02356A]">
                                     regler en ligne(om/momo)
                                 </label>
                             </div>
                             <div class="flex items-center">
-                                <input type="radio" @change="handleRadioMethode" required name="radio2" id="radioButton2" class="h-5 w-5 accent-[#07074D]" />
-                                <label for="radioButton2" class="pl-3 text-base font-medium text-[#07074D]">
+                                <input type="radio" @change="handleRadioMethode" required name="radio2" id="radioButton2" class="h-5 w-5 accent-[#02356A]" />
+                                <label for="radioButton2" class="pl-3 text-base font-medium text-[#02356A]">
                                     regler comptant (payer a la fin du voyage)
                                 </label>
                             </div>
@@ -115,6 +126,14 @@
 <script>
 export default {
   created () {
+    this.axios.get(this.$store.state.api + "Vehicule", this.$store.state.config)
+            .then(({ data }) => {
+                if(data==false){
+                    this.alertTap = true
+                }
+            }).catch(error => {
+                console.log(error)
+            })
   },
   data () {
     return {
@@ -129,7 +148,8 @@ export default {
             nombre_de_place:"",
             Mode_de_paiement:"",
             bagage:"",
-        }
+        },
+        alertTap:false
     }
   },
   methods: {
@@ -165,6 +185,11 @@ export default {
     handleRadioMethode(){
         this.form.Mode_de_paiement == 'on' ? this.form.Mode_de_paiement = 'off' : this.form.Mode_de_paiement = 'on';
     },
+
+    AddVehicule(){
+        this.$router.push("/")
+        window.emitter.emit("FormVehicule")
+    }
   },
 
 }

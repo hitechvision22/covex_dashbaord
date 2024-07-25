@@ -2,6 +2,48 @@
    <div>
       <div class=" flex justify-between relative">
 
+      <div v-if="logoutLoading" class="h-screen w-screen bg-white bg-opacity-25 absolute z-50 flex justify-center items-center">
+         <div  class="flex flex-col items-center">
+            <div class="animate-spin rounded-full h-32 w-32 border-t-4 border-[#02356A]"></div>
+            <p class="mt-4 text-lg text-[#02356A]">Déconnexion en cours, veuillez patienter...</p>
+         </div>
+      </div>
+
+         <div  v-if="InfoCar"
+            class="h-screen w-screen bg-opacity-30 bg-black  absolute z-50 flex justify-center items-center">
+            <div class="h-full w-full  absolute" @click="InfoCar = !InfoCar"></div>
+            <div
+               class="w-5/12  bg-white  rounded-lg mx-auto z-50 flex justify-center">
+               <div class="w-full bg-white rounded-lg shadow-md p-6">
+                 <div class="w-full flex justify-between items-center">
+                  <h1 class="text-2xl font-bold text-gray-800 mb-4">Détails du vehicule</h1>
+                  <button @click="InfoCar = !InfoCar" class=" top-0 right-0 p-2 bg-gray-200 rounded-full hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                     <svg class="w-6 h-6 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                     </svg>
+                  </button>
+                 </div>
+                  <div class="mb-4">
+                     <h2 class="text-xl font-semibold text-gray-700">Marque et Modèle</h2>
+                     <p class="text-gray-600">Marque: <span class="font-medium">{{ vehicule.marque }}</span></p>
+                     <p class="text-gray-600">Modèle: <span class="font-medium">{{ vehicule.modele }}</span></p>
+                  </div>
+                  <div class="mb-4">
+                     <h2 class="text-xl font-semibold text-gray-700">Informations</h2>
+                     <p class="text-gray-600">couleur: <span class="font-medium">{{ vehicule.couleur }}</span></p>
+                     <p class="text-gray-600">Nombre de places: <span class="font-medium">{{ vehicule.nombre_place }}</span></p>
+                  </div>
+                  <div class="mb-4">
+                     <h2 class="text-xl font-semibold text-gray-700">Caractéristiques supplémentaires</h2>
+                     <ul class="list-disc list-inside text-gray-600">
+                        <p class="text-gray-600">Etat: <span class="font-medium">{{ vehicule.etat }}</span></p>
+                     </ul>
+                  </div>
+                  <span href="#" class="block text-center text-blue-500 hover:underline mt-6">enregister le {{ moment(vehicule.created_at).format("DD/MM/YYYY h:m") }}</span>
+               </div>
+            </div>
+         </div>
+
          <div v-if="ProfileTap"
             class="h-screen w-screen bg-opacity-30 bg-black  absolute z-50 flex justify-center items-center">
             <div @click="ProfileTap = !ProfileTap" class="h-full w-full  absolute"></div>
@@ -282,7 +324,7 @@
                         <div class="sm:col-span-4">
                            <label for="couleur" class="block text-sm font-medium leading-6 text-gray-900">Couleur</label>
                            <div class="mt-2">
-                              <input id="email" required v-model="AddFormTrajet.couleur" placeholder="couleur" type="email" 
+                              <input id="email" required v-model="AddFormTrajet.couleur" placeholder="couleur" type="text" 
                               class="block w-full rounded-md border-0 py-1.5 outline-none px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#02356A] sm:text-sm sm:leading-6">
                            </div>
                         </div>
@@ -749,11 +791,11 @@
                      <img src="/images/logo.png" class="w-full h-full object-cover object-center" alt="">
                   </div>
                   <div class="">
-                     <p class="text-2xl  text-[#02356A] font-['roboto'] font-semibold uppercase text-center">covoiturage express</p>
+                     <p class="text-2xl hidden md:block  text-[#02356A] font-['roboto'] font-semibold uppercase text-center">covoiturage express</p>
                   </div>
                </div>
-               <div class="space-y-2 mt-20 mx-4 ">
-                  <router-link to="dashboard" class="flex space-x-4  p-2 rounded ">
+               <div class="space-y-2 mt-20 mx-2 md:mx-4 ">
+                  <router-link to="dashboard" class="flex space-x-4 p-2 rounded justify-center lg:justify-start   ">
                      <div class="flex items-center space-x-3">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                            stroke="currentColor" class="size-6 ">
@@ -763,11 +805,11 @@
                               d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z" />
                         </svg>
                      </div>
-                     <div class="text-md font-['roboto'] capitalize ">
+                     <div class="text-md font-['roboto'] capitalize hidden md:block">
                         <span>{{user.type > 2 ?'Dashboard':'Mon profil'}}</span>
                      </div>
                   </router-link>
-                  <router-link v-if="user.type > 2" to="utilisateurs" class="flex space-x-4 p-2 rounded ">
+                  <router-link v-if="user.type > 2" to="utilisateurs" class="flex space-x-4 p-2 rounded justify-center lg:justify-start   ">
                      <div class="flex items-center space-x-3">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                            stroke="currentColor" class="size-6 ">
@@ -776,11 +818,11 @@
                         </svg>
 
                      </div>
-                     <div class="text-md font-['roboto'] capitalize ">
+                     <div class="text-md font-['roboto'] capitalize hidden md:block">
                         <span>utilisateurs</span>
                      </div>
                   </router-link>
-                  <router-link v-if="user.type > 2" to="vehicules" class="flex space-x-4  p-2 rounded ">
+                  <router-link v-if="user.type > 2" to="vehicules" class="flex space-x-4  p-2 rounded  justify-center lg:justify-start   ">
                      <div class="flex items-center space-x-3">
                         
                         <svg id="Layer_1"  version="1.1" viewBox="0 0 30 30" xml:space="preserve"
@@ -790,21 +832,21 @@
                               d="M26.206,12.559l-2.058-5.88C23.587,5.077,22.069,4,20.371,4H9.629C7.931,4,6.413,5.077,5.853,6.678l-2.058,5.88  C2.696,13.281,2,14.53,2,15.904V23c0,1.105,0.895,2,2,2s2-0.895,2-2v-1.261c0,0,5.281,0.261,9,0.261s9-0.261,9-0.261V23  c0,1.105,0.895,2,2,2s2-0.895,2-2v-7.096C28,14.53,27.303,13.281,26.206,12.559z M6.595,10.613l1.146-3.274  C8.022,6.537,8.779,6,9.629,6h10.742c0.85,0,1.607,0.537,1.888,1.339l1.146,3.274c0.18,0.515-0.249,1.034-0.788,0.947  C20.656,11.243,18.135,11,15,11c-3.135,0-5.656,0.243-7.617,0.56C6.844,11.647,6.415,11.128,6.595,10.613z M6.5,18  C5.672,18,5,17.328,5,16.5S5.672,15,6.5,15S8,15.672,8,16.5S7.328,18,6.5,18z M18,17h-6c-0.552,0-1-0.448-1-1c0-0.552,0.448-1,1-1h6  c0.552,0,1,0.448,1,1C19,16.552,18.552,17,18,17z M23.5,18c-0.828,0-1.5-0.672-1.5-1.5s0.672-1.5,1.5-1.5s1.5,0.672,1.5,1.5  S24.328,18,23.5,18z" />
                         </svg>
                      </div>
-                     <div class="text-md font-['roboto'] capitalize ">
+                     <div class="text-md font-['roboto'] capitalize hidden md:block">
                         <span>vehicules</span>
                      </div>
                   </router-link>
-                  <router-link v-if="user.type > 2" to="transactions" class="flex space-x-4  p-2 rounded ">
+                  <router-link v-if="user.type > 2" to="transactions" class="flex space-x-4  p-2 rounded  justify-center lg:justify-start   ">
                      <div class="flex items-center space-x-3">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5" />
                         </svg>
                      </div>
-                     <div class="text-md font-['roboto'] capitalize ">
+                     <div class="text-md font-['roboto'] capitalize hidden md:block">
                         <span>transactions</span>
                      </div>
                   </router-link>
-                  <router-link v-if="user.type > 2" to="reservations" class="flex space-x-4  p-2 rounded  ">
+                  <router-link v-if="user.type > 2" to="reservations" class="flex space-x-4  p-2 rounded   justify-center lg:justify-start  ">
                      <div class="flex items-center space-x-3">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                            stroke="currentColor" class="size-6">
@@ -812,24 +854,28 @@
                               d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
                         </svg>
                      </div>
-                     <div class="text-md font-['roboto'] capitalize ">
+                     <div class="text-md font-['roboto'] capitalize hidden md:block">
                         <span>reservations</span>
                      </div>
                   </router-link>
 
-                  <router-link v-if="user.type > 2" to="MesReservations" class="flex space-x-4  p-2 rounded  ">
+                  <router-link  to="MesReservations" class="flex space-x-4  p-2 rounded   justify-center lg:justify-start   ">
                      <div class="flex items-center space-x-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                           stroke="currentColor" class="size-6">
-                           <path stroke-linecap="round" stroke-linejoin="round"
-                              d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
-                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-calendar">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+  <path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" />
+  <path d="M16 3v4" />
+  <path d="M8 3v4" />
+  <path d="M4 11h16" />
+  <path d="M11 15h1" />
+  <path d="M12 15v3" />
+</svg>
                      </div>
-                     <div class="text-md font-['roboto'] capitalize ">
+                     <div class="text-md font-['roboto'] capitalize hidden md:block">
                         <span>mes reservations</span>
                      </div>
                   </router-link>
-                  <router-link v-if="user.type > 2" to="trajets" class="flex space-x-4  p-2 rounded ">
+                  <router-link v-if="user.type > 2" to="trajets" class="flex space-x-4  p-2 rounded  justify-center lg:justify-start   ">
                      <div class="flex items-center space-x-3">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                            stroke="currentColor" class="size-6">
@@ -840,7 +886,7 @@
                         </svg>
 
                      </div>
-                     <div class="text-md font-['roboto'] capitalize ">
+                     <div class="text-md font-['roboto'] capitalize hidden md:block">
                         <span>trajets</span>
                      </div>
                   </router-link>
@@ -849,7 +895,7 @@
             </div>
             <div class="h-14 w-full flex space-x-3 justify-center items-center mb-4">
                <button @click="logout" title="deconnexion">
-                  <span class="text-lg font-['roboto'] block text-red-400">Deconnexion</span>
+                  <span class="text-lg font-['roboto']  text-red-400 hidden md:block">Deconnexion</span>
                </button>
                <div>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -868,36 +914,36 @@
             <div class="h-20 mb-6 w-full print:hidden flex items-center justify-center bg-[#02356A]">
                <div class="w-[95%] mx-auto  flex justify-between  ">
                   <div class="space-x-4 flex items-center">
-                     <span class="font-['roboto'] text-2xl text-white font-semibold">Tableau De Bord</span>
+                     <span class="font-['roboto'] text-lg md:text-2xl text-white font-semibold">Tableau De Bord</span>
                   </div>
-                  <div class="flex space-x-4 items-center">
+                  <div class="flex space-x-2 lg:space-x-4 items-center">
 
-                     <button v-if="this.$store.state.user.type > 0" @click="this.$router.push('/AjouterTrajet')"  class="space-x-2 px-2 py-1 flex items-center text-white border border-white rounded-full">
+                     <button v-if="this.$store.state.user.type > 0" @click="AddTrajet"  class="space-x-2 p-1 flex items-center text-white border border-white rounded-full">
                         <span>
-                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
+                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4 lg:size-6">
                               <path fill-rule="evenodd" d="M12 3.75a.75.75 0 0 1 .75.75v6.75h6.75a.75.75 0 0 1 0 1.5h-6.75v6.75a.75.75 0 0 1-1.5 0v-6.75H4.5a.75.75 0 0 1 0-1.5h6.75V4.5a.75.75 0 0 1 .75-.75Z" clip-rule="evenodd" />
                            </svg>
 
                         </span>
-                        <span class="flex  text-sm">
+                        <span class="text-sm  hidden md:block">
                            ajouter un trajet
                         </span>
                      </button>
 
-                     <button  @click="this.$router.push('/recherche')" class="space-x-2 px-3 py-1 flex items-center text-white border border-white rounded-full">
+                     <button  @click="this.$router.push('/recherche')" class="space-x-2 p-1  flex items-center text-white border border-white rounded-full">
                         <span>
-                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
+                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4 lg:size-6">
                               <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z" clip-rule="evenodd" />
                            </svg>
                         </span>
-                        <span class="flex  text-sm">
+                        <span class="  text-sm hidden md:block">
                            recherche
                         </span>
                      </button>
 
                      <div v-if="this.user.wallet" class="flex space-x-1 items-center text-white" title="porte monnaie de covex">
                         <span>
-                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 lg:size-6">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a2.25 2.25 0 0 0-2.25-2.25H15a3 3 0 1 1-6 0H5.25A2.25 2.25 0 0 0 3 12m18 0v6a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 9m18 0V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v3" />
                            </svg>
                         </span>
@@ -906,24 +952,24 @@
                         </span>
                      </div>
                      <div v-if="this.$store.state.user.type > 2"
-                        class="bg-[#02356A] border border-white w-8 h-8 flex items-center justify-center rounded-full">
+                        class="bg-[#02356A] border border-white w-7 lg:w-8  h-7 lg:h-8 flex items-center justify-center rounded-full">
                         <svg @click="getFrais" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                           stroke-width="1.5" stroke="currentColor" class="size-6 text-white cursor-pointer">
+                           stroke-width="1.5" stroke="currentColor" class="size-4 lg:size-6 text-white cursor-pointer">
                            <path stroke-linecap="round" stroke-linejoin="round"
                               d="M14.121 7.629A3 3 0 0 0 9.017 9.43c-.023.212-.002.425.028.636l.506 3.541a4.5 4.5 0 0 1-.43 2.65L9 16.5l1.539-.513a2.25 2.25 0 0 1 1.422 0l.655.218a2.25 2.25 0 0 0 1.718-.122L15 15.75M8.25 12H12m9 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                         </svg>
 
                      </div>
                      <div @click="getNotification"
-                        class=" border border-white w-8 h-8 flex items-center justify-center rounded-full">
+                        class=" border border-white w-7 lg:w-8  h-7 lg:h-8 flex items-center justify-center rounded-full">
                         <svg v-if="!notif" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                           class="size-5 text-white">
+                           class="size-4 lg:size-6 text-white">
                            <path fill-rule="evenodd"
                               d="M5.25 9a6.75 6.75 0 0 1 13.5 0v.75c0 2.123.8 4.057 2.118 5.52a.75.75 0 0 1-.297 1.206c-1.544.57-3.16.99-4.831 1.243a3.75 3.75 0 1 1-7.48 0 24.585 24.585 0 0 1-4.831-1.244.75.75 0 0 1-.298-1.205A8.217 8.217 0 0 0 5.25 9.75V9Zm4.502 8.9a2.25 2.25 0 1 0 4.496 0 25.057 25.057 0 0 1-4.496 0Z"
                               clip-rule="evenodd" />
                         </svg>
                         <svg v-else xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                           stroke-width="1.5" stroke="currentColor" class="size-5 text-red-500">
+                           stroke-width="1.5" stroke="currentColor" class="size-4 lg:size-6 text-red-500">
                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                         </svg>
                      </div>
@@ -1027,16 +1073,20 @@ setInterval(() => {
   const currentTime = Date.now();
   const inactivityDuration = currentTime - lastActivityTime;
 
-console.log(inactivityDuration);
-  if (inactivityDuration > 1800000) { 
-   localStorage.removeItem('jwtToken');
-   this.$router.push('/');
-  }
-}, 60000); 
+   if (inactivityDuration > 1800000) { 
+      localStorage.removeItem('jwtToken');
+      this.$router.push('/');
+   }
+   }, 60000); 
 
 
       window.emitter.on("SignalUser", (data) => {
         this.UserTap = data[0]
+      })
+
+      window.emitter.on("MyCar",()=>{
+         this.MyCar();
+         
       })
 
       window.emitter.on("loading", (data) => {
@@ -1201,11 +1251,27 @@ console.log(inactivityDuration);
          payerLoading:false,
          payerTap:false,
          datas:"",
-         TransactionEffec:false
+         TransactionEffec:false,
+         InfoCar:false,
+         logoutLoading:false
+
       }
    },
 
    methods: {
+
+      MyCar(){
+         this.loading = true
+         this.axios.get(this.$store.state.api + "UserVehicule/"+this.$store.state.user.id, this.$store.state.config)
+            .then(({ data }) => {
+               this.loading = false
+               this.vehicule = data
+               this.InfoCar = true
+            }).catch(error => {
+               this.loading = false
+               console.log(error)
+            })
+      },
 
     
 
@@ -1267,7 +1333,7 @@ console.log(inactivityDuration);
          data.append("nombre_portes", this.AddFormTrajet.nombre_portes)
          data.append("etat", this.AddFormTrajet.etat)
          data.append("nombre_places", this.AddFormTrajet.nombre_places)
-         this.axios.post(this.$store.state.api + "CreateUser", data, this.$store.state.config)
+         this.axios.post(this.$store.state.api + "SaveVehicule", data, this.$store.state.config)
             .then(({ data }) => {
                console.log(data);
                this.loading = false
@@ -1278,6 +1344,7 @@ console.log(inactivityDuration);
                this.AddFormTrajet.nombre_portes = ""
                this.AddFormTrajet.etat = ""
                this.AddFormTrajet.nombre_places = ""
+               this.$store.state.Isvehicule = true
             }).catch(error => {
                this.loading = false
                console.log(error)
@@ -1428,13 +1495,24 @@ console.log(inactivityDuration);
             })
       },
 
+
+
+
+
+      AddTrajet(){
+         this.$router.push('/AjouterTrajet')
+      },
+
       logout() {
+         this.logoutLoading = true
          this.axios.post(this.$store.state.api + "logout", "", this.$store.state.config)
             .then(({ data }) => {
+               this.logoutLoading = false
                console.log(data);
                localStorage.clear()
                this.$router.push('/');
             }).catch(error => {
+               this.logoutLoading = false
                console.log(error)
             })
       }

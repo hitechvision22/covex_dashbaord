@@ -57,7 +57,7 @@
                             <div class="text-center text-md lg:text-lg text-slate-400 font-['poppins']">
                                 <p>bienvenue parmi nous, Veuillez creer votre compte</p>
                             </div>
-                            <form @submit.prevent="login" class="w-11/12 lg:w-10/12 mx-auto pt-6 space-y-5">
+                            <form @submit.prevent="SendEmail" class="w-11/12 lg:w-10/12 mx-auto pt-6 space-y-5">
 
                                 <div class="w-full h-11 bg-white ">
                                     <input type="text" v-model="form.name" required
@@ -73,7 +73,7 @@
                                 <div class="w-full  flex space-x-2 bg-white px-2  border-[#02356A] border-l-4 shadow hover:shadow-lg duration-700 ">
                                     <div class="w-11/12  h-11 ">
                                         <input :type="ShowPassword ? 'text' : 'password'" required
-                                            style="appearance: textfield" v-model="password"
+                                            style="appearance: textfield" v-model="form.password"
                                             class="w-full  outline-none font-semibold placeholder:capitalize placeholder:font-normal h-full px-2 text-sm font-['poppins'] "
                                             placeholder="mot de passe">
                                     </div>

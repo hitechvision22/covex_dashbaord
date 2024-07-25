@@ -62,7 +62,7 @@ export default {
   created() {
     var route = useRoute();
     this.loading = true
-    this.axios.delete(this.$store.state.api + "reservation/" + route.query.id, this.$store.state.config)
+    this.axios.get(this.$store.state.api + "reservations/" + route.query.id, this.$store.state.config)
       .then(({ data }) => {
         this.currentReservation = data
         this.loading = false

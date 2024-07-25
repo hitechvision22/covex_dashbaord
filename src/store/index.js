@@ -6,8 +6,8 @@ const store = createStore({
   state: {
     // api: "https://api.covoiturageexpress.com/api/",
     // apifile: "https://api.covoiturageexpress.com/",
-    api: "http://192.168.0.100:8000/api/",
-    apifile: "http://192.168.0.100:8000/",
+    api: "http://192.168.1.148:8000/api/",
+    apifile: "http://192.168.1.148:8000/",
     config: {
       headers: { Authorization: `Bearer ${localStorage.getItem("jwtToken")}` },
     },
@@ -16,7 +16,8 @@ const store = createStore({
     reservations:[],
     user:[],
     transactions:[],
-    montantFrais:0
+    montantFrais:0,
+    Isvehicule:false
   },
   mutations: {
     reset() {},

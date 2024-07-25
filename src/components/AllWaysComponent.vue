@@ -3,19 +3,19 @@
    href="https://horizon-tailwind-react-corporate-7s21b54hb-horizon-ui.vercel.app/static/css/main.d7f96858.css" /> 
    <div class="space-y-4">
 
-      <div class="w-full  mx-3 space-y-3 -mt-2">
+      <div class="w-full  mx-0 lg:mx-3  space-y-3 -mt-6 md:-mt-2">
          <div>
             <span class="text-2xl font-semibold">Mon profil</span>
          </div>
-         <div class="items-center w-full py-4 flex justify-between border-b-2  border-[#02356A]">
+         <div class="items-center w-full py-2 lg:py-4 flex flex-col md:flex-row  justify-end lg:justify-between border-b-2  border-[#02356A] space-y-5 ">
             <div class="flex space-x-3 items-center">
-               <div class="h-28 w-28 rounded-full bg-[#02356A] flex justify-center items-center">
-                  <span class="text-white font-semibold uppercase text-lg">
+               <div class="h-20 lg:h-28 w-20 lg:w-28 rounded-full bg-[#02356A] flex justify-center items-center">
+                  <span class="text-white font-semibold uppercase text-sm lg:text-lg">
                      {{ this.$store.state.user.name}}
                   </span>
                </div>
                <div class="space-y-1">
-                  <div class="flex space-x-2 items-center">
+                  <div class="flex lg:space-x-2 items-center">
                      <p class="text-2xl font-semibold">
                         <span class="">
                            {{ this.$store.state.user.name }}
@@ -40,13 +40,17 @@
                   </div>
                </div>
             </div>
-            <div class="mx-7 flex items-center space-x-4">
-               <button @click="ShowForm"
-                    class="flex space-x-2 items-center text-[#02356A]  border border-[#02356A] px-4 py-1 rounded hover:bg-[#02356A] hover:text-white duration-300">
+            <div class="mx-7 flex lg:flex-row flex-col  items-center lg:space-x-4 space-y-2">
+               <button  v-if="!this.$store.state.Isvehicule  && this.$store.state.user.type >0" @click="ShowForm"
+                    class="flex w-full justify-center space-x-2 items-center text-[#02356A]  border border-[#02356A] px-4 py-1 rounded hover:bg-[#02356A] hover:text-white duration-300">
+                    <span>enregistrer mon vehicule</span>
+                </button>
+                <button v-else-if="this.$store.state.user.type >0" @click="MyCar"
+                    class="flex w-full justify-center space-x-2 items-center text-[#02356A]  border border-[#02356A] px-4 py-1 rounded hover:bg-[#02356A] hover:text-white duration-300">
                     <span>mon vehicule</span>
                 </button>
                 <button  @click="ShowUpdatedTap"
-                    class="flex space-x-2 items-center text-[#02356A]  border border-[#02356A] px-4 py-1 rounded hover:bg-[#02356A] hover:text-white duration-300">
+                    class="flex w-full space-x-2 items-center text-[#02356A]  border border-[#02356A] px-2 py-1 rounded hover:bg-[#02356A] hover:text-white duration-300">
                     <span> Modifier mon profil</span>
                 </button>
             </div>
@@ -346,9 +350,19 @@
 <script>
 import moment from "moment"
 export default {
+   created() {
+      this.axios.get(this.$store.state.api + "Vehicule", this.$store.state.config)
+            .then(({ data }) => {
+                if(data==true){
+                    this.$store.state.Isvehicule = true
+                }
+            }).catch(error => {
+                console.log(error)
+            })
+   },
   data () {
     return {
-      moment:moment
+      moment:moment,
     }
   },
 
@@ -359,6 +373,10 @@ export default {
 
    ShowForm(){
       window.emitter.emit("FormVehicule")
+   },
+
+   MyCar(){
+      window.emitter.emit("MyCar")
    }
   },
 
