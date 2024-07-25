@@ -167,11 +167,9 @@ export default {
   },
   methods: {
     increment() {
-        console.log(this.trajet.nombre_de_place_disponible);
         if(this.count > this.trajet.nombre_de_place_disponible){
             this.count += 1;
         }
-      this.count++;
     },
     decrement() {
       if (this.count > 1) {

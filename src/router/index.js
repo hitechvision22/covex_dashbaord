@@ -13,6 +13,8 @@ import TestComponent from "@/components/TestComponent.vue";
 import SearchComponent from "@/components/OthersComponents/SearchComponent.vue";
 import AddTrajetComponent from "@/components/OthersComponents/AddTrajetComponent.vue";
 import DetailComponent from "@/components/DetailComponent.vue";
+import MesReservationComponent from "@/components/OthersComponents/MesReservationComponent.vue";
+import DetailReservationComponent from "@/components/OthersComponents/DetailReservationComponent.vue";
 
 
 const routes = [
@@ -99,6 +101,22 @@ const routes = [
         components: {
           default: NavBar,
           one: DetailComponent,
+        },
+      },
+      {
+        path: "/MesReservations",
+        name: "MesReservations",
+        components: {
+          default: NavBar,
+          one: MesReservationComponent,
+        },
+      },
+      {
+        path: "/DetailReservation",
+        name: "DetailReservation",
+        components: {
+          default: NavBar,
+          one: DetailReservationComponent,
         },
       },
     ],

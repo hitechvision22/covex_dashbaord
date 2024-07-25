@@ -205,7 +205,7 @@
             </div>
          </div>
          <div v-if="TransactionEffec" class="h-screen w-screen absolute z-[400] flex justify-center items-center">
-            <div class="w-full h-full bg-black bg-opacity-30 absolute"></div>
+            <div @click="TransactionEffec = !TransactionEffec" class="w-full h-full bg-black bg-opacity-30 absolute"></div>
             <div class="bg-white p-6 rounded-lg shadow-lg text-center w-full max-w-md z-50">
                <div class="flex justify-center mb-4">
                      <div class="bg-green-100 rounded-full p-4">
@@ -215,7 +215,7 @@
                <h2 class="text-2xl font-bold text-gray-800 mb-4">Reservation Acceptée!</h2>
                <p class="text-gray-600 mb-4">Votre transaction a été effectuée avec succès.</p>
                
-               <button class="bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+               <button @click="TransactionEffec=false" class="bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
                      fermer
                </button>
             </div>
@@ -816,6 +816,19 @@
                         <span>reservations</span>
                      </div>
                   </router-link>
+
+                  <router-link v-if="user.type > 2" to="MesReservations" class="flex space-x-4  p-2 rounded  ">
+                     <div class="flex items-center space-x-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                           stroke="currentColor" class="size-6">
+                           <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
+                        </svg>
+                     </div>
+                     <div class="text-md font-['roboto'] capitalize ">
+                        <span>mes reservations</span>
+                     </div>
+                  </router-link>
                   <router-link v-if="user.type > 2" to="trajets" class="flex space-x-4  p-2 rounded ">
                      <div class="flex items-center space-x-3">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -1211,6 +1224,7 @@ console.log(inactivityDuration);
         this.axios.post(this.$store.state.api + "reservation",data, this.$store.state.config)
             .then(({ data }) => {
                this.payerLoading = false
+               this.payerTap = false
                console.log(data)
                this.TransactionEffec = true
             }).catch(error => {
