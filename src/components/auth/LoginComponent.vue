@@ -226,7 +226,7 @@ export default {
                         localStorage.setItem('type', data.user.type)
                         this.$store.state.config = { headers: { Authorization: `Bearer ${localStorage.getItem("jwtToken")}` }, }
                         this.$router.push('/dashboard');
-
+// sokengfossa@gmail.com
                     })
                     .catch(error => {
                         this.loading = false

@@ -58,7 +58,7 @@
       </div>
       <div v-if="this.$store.state.user.type > 2" class="flex flex-col justify-center   py-2">
             <div
-               class="min-w-[375px] md:min-w-[700px] xl:min-w-[800px] grid grid-cols-5 gap-5 md:grid-cols-5 lg:grid-cols-4 2xl:grid-cols-4 3xl:grid-cols-6">
+               class=" overflow-scroll overflow-x-hidden md:min-w-[700px] xl:min-w-[800px] grid grid-cols-1 gap-5 md:grid-cols-5 lg:grid-cols-4 2xl:grid-cols-4 3xl:grid-cols-6">
                <div
                   class="relative flex flex-grow !flex-row  items-center rounded-[10px]  border-[1px] border-gray-200 bg-white bg-clip-border shadow-md shadow-[#F3F3F3] dark:border-[#ffffff33] dark:!bg-navy-800 dark:text-white dark:shadow-none">
                   <div class="ml-[18px] flex h-[90px] w-auto flex-row items-center">

@@ -143,7 +143,7 @@
                               </div>
                            </div>
                      </div>
-                     <div class="flex w-full justify-center items-center h-36 text-lg text-[#02356A]">
+                     <div v-else class="flex w-full justify-center items-center h-36 text-lg text-[#02356A]">
                         <span>
                            ce profil n'a pas de carte national d'identité enregistre
                         </span>
@@ -173,7 +173,7 @@
                                </p>
                          </div>
                      </div>
-                     <div class="flex flex-col w-full justify-center items-center h-20">
+                     <div v-if="userTrajets.length == 0" class="flex flex-col w-full justify-center items-center h-20">
                         <span class="text-lg">
                            Aucun post pour ce profil
                         </span>
@@ -229,7 +229,7 @@
                                  </div>
                            </div>
                         </div>
-                        <div class="text-center justify-center items-center flex ">
+                        <div v-if="userAvis.length==0" class="text-center justify-center items-center flex ">
                            <span>Ce profil n'a pas d'avis </span>
                         </div>
                      </div>
@@ -679,7 +679,7 @@
                         <p>type de compte</p>
                      </div>
                      <div>
-                        <select v-model="form.type" name="" id="" class="w-full h-10 px-4 border border-slate-800 rounded-lg focus:outline-none text-sm">
+                        <select required v-model="form.type" name="" id="" class="w-full h-10 px-4 border border-slate-800 rounded-lg focus:outline-none text-sm">
                            <option value="0">client</option>
                            <option value="1">chauffeur</option>
                            <option value="2">caissiere</option>
@@ -1099,11 +1099,11 @@ setInterval(() => {
 
       window.emitter.on("ShowReservation", (data) => {
          this.loading = true
-         this.axios.get(this.$store.state.api + "GetConversationAdmin/" + data.id, this.$store.state.config)
+         this.axios.get(this.$store.state.api + "reservations/" + data.id, this.$store.state.config)
             .then(({ data }) => {
                this.loading = false
                this.DetailReservation = true
-               this.reservation = data[0]
+               this.reservation = data
                console.log(data)
             }).catch(err => console.log(err))
       })
@@ -1154,7 +1154,9 @@ setInterval(() => {
          this.$router.push('/')
       } else {
          this.loading = true
-         this.axios.get(this.$store.state.api + "user", this.$store.state.config)
+         this.axios.get(this.$store.state.api + "user", {
+      headers: { Authorization: `Bearer ${localStorage.getItem("jwtToken")}` },
+    })
             .then(({ data }) => {
                this.user = data
                this.$store.state.user = data

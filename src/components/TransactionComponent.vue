@@ -98,10 +98,7 @@
                                                     <button @click="DetailTransaction(transaction)"
                                                         class="px-3 py-1 bg-green-500 border border-green-500 hover:bg-transparent duration-500 hover:text-green-500 text-white font-semibold rounded text-sm">voir le detail</button>
                                                 </div>
-                                                <div>
-                                                    <button @click="DeleteTransaction(transaction)"
-                                                        class="px-3 py-1 bg-red-500 border border-red-500 hover:bg-transparent duration-500 hover:text-red-500 text-white font-semibold rounded text-sm">supprimer</button>
-                                                </div>
+                                                
                                             </td>
                                         </tr>
 

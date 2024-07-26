@@ -96,8 +96,7 @@
                                     </div>
                                 </div>
                                 <div class="w-full h-11  bg-red-500 ">
-                                    <select v-model="form.type" name="" id="" class="w-full font-semibold border-l-4 placeholder:capitalize placeholder:font-normal border-[#02356A] outline-none shadow focus:shadow-lg duration-700  h-full px-4 text-md ">
-                                        <option value="" class="w-full text-gray-300 font-semibold border-l-4 placeholder:capitalize placeholder:font-normal border-[#02356A] outline-none shadow focus:shadow-lg duration-700  h-full px-4 text-md ">Choisir un role</option>
+                                    <select required v-model="form.type" name="" id="" class="w-full font-semibold border-l-4 placeholder:capitalize placeholder:font-normal border-[#02356A] outline-none shadow focus:shadow-lg duration-700  h-full px-4 text-md ">
                                         <option value=1 class="w-full font-semibold border-l-4 placeholder:capitalize placeholder:font-normal border-[#02356A] outline-none shadow focus:shadow-lg duration-700  h-full p-4 text-md ">chauffeur</option>
                                         <option value=0 class="w-full font-semibold border-l-4 placeholder:capitalize placeholder:font-normal border-[#02356A] outline-none shadow focus:shadow-lg duration-700  h-full p-4 text-md ">client</option>
                                     </select>
@@ -142,7 +141,7 @@ export default {
                 name: '',
                 email: '',
                 password: '',
-                type:""
+                type:1
             },
             ShowPassword: false,
             errorTap: false,
@@ -173,7 +172,8 @@ export default {
                     this.loading = false
                     localStorage.setItem('jwtToken', data.access_token.token)
                     localStorage.setItem('type', data.user.type)
-                    this.$router.push('/');
+                    this.$router.push('/dashboard');
+                    this.$router.go()
                 }).catch(error => {
                     this.loading = false
                     this.ShowError(error.response.data.message);
