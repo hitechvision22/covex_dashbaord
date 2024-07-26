@@ -87,7 +87,7 @@
                     </div>
                 </router-link>
             </div>
-            <div v-if="results.length == 0 && !SearchLoading" class="text-center p-8 bg-white rounded shadow-md">
+            <div v-if="results.length == 0 && !SearchLoading" class="text-center p-8 bg-white rounded ">
                 <svg class="w-16 h-16 mx-auto text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 11l-5 5m0 0l-5-5m5 5V6" />
                 </svg>

@@ -272,7 +272,7 @@
                   </div>
                   <div class="mb-4 w-full">
                      <p class="text-lg font-medium text-gray-700">Prix total :</p>
-                     <p class="text-xl font-bold text-[#02356A]">{{ price + this.$store.state.montantFrais }} XAF</p>
+                     <p class="text-xl font-bold text-[#02356A]">{{ price + parseInt(this.$store.state.montantFrais) }} XAF</p>
                   </div>
                   <div class="mb-4 w-full">
                      <label for="payer-number" class="block text-lg font-medium text-gray-700 mb-2">Numéro du payeur :</label>
@@ -1293,6 +1293,7 @@ setInterval(() => {
                this.payerTap = false
                console.log(data)
                this.TransactionEffec = true
+               this.$router.push('/MesReservations')
             }).catch(error => {
                this.payerLoading = false
                console.log(error)

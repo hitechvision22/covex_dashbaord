@@ -1,6 +1,50 @@
 <template>
   <div>
 
+    <div v-if="isModalOpen" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+      <form @submit.prevent="AddAvis" class="bg-white p-6 rounded-lg w-1/3">
+        <h2 class="text-xl font-bold mb-4">Votre avis sur le service de covoiturage</h2>
+
+        <!-- Star Rating -->
+        <div class="flex space-x-1 mb-4">
+          <span
+            v-for="star in 5"
+            :key="star"
+            @click="setRating(star)"
+            class="cursor-pointer text-yellow-500"
+          >
+            <i :class="star <= rating ? 'fas fa-star' : 'far fa-star'"></i>
+          </span>
+        </div>
+
+        <!-- Description Field -->
+        <textarea
+        spellcheck="true"
+          v-model="description"
+          class="w-full p-2 border rounded mb-4"
+          rows="3"
+          required
+          placeholder="Décrivez votre expérience"
+        ></textarea>
+
+        <!-- Submit and Close Buttons -->
+        <div class="flex justify-end space-x-2">
+          <button
+          type="submit"
+            :disabled="isLoading"
+            class="bg-green-500 text-white px-4 py-2 rounded flex items-center"
+          >
+            <span v-if="isLoading" class="loader mr-2"></span>
+            <span v-if="!isLoading">Soumettre</span>
+            <span v-else>Chargement...</span>
+          </button>
+          <button @click="closeModal" class="bg-gray-500 text-white px-4 py-2 rounded">
+            Annuler
+          </button>
+        </div>
+      </form>
+    </div>
+
     <div v-if="loading" class="flex flex-col items-center justify-center space-y-4">
         <!-- Spinner -->
         <div class="w-16 h-16 border-4 border-t-4 border-blue-500 border-solid rounded-full animate-spin"></div>
@@ -39,7 +83,10 @@
         </div>
 
         <!-- Actions -->
-        <div class="flex justify-end">
+        <div class="flex justify-end items-center space-x-2">
+          <button @click="openModal" class="bg-blue-500 text-white px-4 py-2 rounded">
+            Laisser un avis
+          </button>
           <a href="https://wa.me/33612345678"
             class="bg-green-500 text-white px-4 py-2 rounded-md shadow hover:bg-green-600">
             Contacter le Chauffeur via WhatsApp
@@ -55,7 +102,11 @@ export default {
   data() {
     return {
       currentReservation: "",
-      loading:true
+      loading:true,
+      isModalOpen: false,
+      rating: 0,
+      description: "",
+      isLoading: false // Nouvel état pour indiquer le chargement
 
     }
   },
@@ -72,6 +123,44 @@ export default {
         console.log(error)
       })
   },
+
+  methods:{
+    openModal() {
+      this.isModalOpen = true;
+    },
+    closeModal() {
+      this.isModalOpen = false;
+      this.rating = 0;
+      this.description = "";
+    },
+    setRating(star) {
+      this.rating = star;
+    },
+    submitReview() {
+      // Ici, tu peux envoyer l'avis à une API ou le traiter
+      console.log(`Rating: ${this.rating}, Description: ${this.description}`);
+      this.closeModal();
+    },
+
+    AddAvis(){
+      this.loading = true
+      let data = new FormData();
+      data.append("note",this.rating);
+      data.append("libelle",this.description)
+      this.axios.post(this.$store.state.api+"StoreAvis",data,this.$store.state.config)
+      .then(({data})=>{
+        this.closeModal();
+        this.loading = false
+        this.rating = 0;
+        this.description = "";
+
+        console.log(data);
+      }).catch((error)=>{
+        this.loading = false
+        console.log(error)
+      })
+    }
+  }
 
 }
 </script>

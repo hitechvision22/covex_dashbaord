@@ -50,24 +50,26 @@
           </div>
         </div>
 
-        <div class="bg-white  rounded-lg shadow-lg text-center w-full max-w-sm">
+        <div class="bg-white  rounded-lg  text-center w-full ">
         <h2 class="text-2xl font-bold text-gray-800 mb-4">Statut des Places</h2>
         <div class="flex justify-center mb-4">
             <div class="flex items-center mr-4">
-                <div class="bg-green-500 w-4 h-4 rounded-full mr-2"></div>
+                <div class="bg-[#02356A] w-8 h-8 rounded-full mr-2 flex justify-center items-center">
+                  <span class="text-sm font-semibold text-white">
+                    {{ this.trajet.nombre_de_place_disponible }}
+                  </span>
+                </div>
                 <p class="text-gray-700">Libre</p>
             </div>
-            <div class="flex items-center">
-                <div class="bg-red-500 w-4 h-4 rounded-full mr-2"></div>
-                <p class="text-gray-700">Occupé</p>
+            <div class="flex items-center mr-4">
+                <div class="border-[#02356A] border  w-8 h-8 rounded-full mr-2 flex justify-center items-center">
+                  <span class="text-sm font-semibold text-[#02356A]">
+                    {{this.trajet.Nombre_de_place - this.trajet.nombre_de_place_disponible}}
+                  </span>
+                </div>
+                <p class="text-gray-700">deja occupe</p>
             </div>
-        </div>
-        <div class="flex space-x-4">
-            <div v-for="index in trajet.Nombre_de_place" :key="index" class="flex flex-col items-center">
-                <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white">1</div>
-                <p class="text-gray-700 mt-2">Libre</p>
-            </div>
-            
+           
         </div>
     </div>
 
@@ -154,6 +156,7 @@ export default {
       )
       .then(({ data }) => {
         this.trajet = data;
+        console.log(data)
       })
       .catch((err) => console.log(err));
   },
@@ -167,7 +170,7 @@ export default {
   },
   methods: {
     increment() {
-        if(this.count > this.trajet.nombre_de_place_disponible){
+        if(this.count < this.trajet.nombre_de_place_disponible){
             this.count += 1;
         }
     },
@@ -180,5 +183,6 @@ export default {
         window.emitter.emit("showpayertap",[this.trajet,this.count])
     }
   },
+
 };
 </script>

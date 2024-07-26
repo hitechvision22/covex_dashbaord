@@ -163,7 +163,7 @@ export default {
         data.append("date_depart",this.form.date_depart)
         data.append("heure_depart",this.form.heure_depart)
         data.append("prix",this.form.prix)
-        data.append("nombre_de_place",this.form.nombre_de_place)
+        data.append("nombre_place",this.form.nombre_de_place)
         data.append("etat",'actif')
         data.append("bagage",this.form.bagage=='on'? 1:0)
         data.append("Mode_de_paiement",this.form.Mode_de_paiement=='on'? 1:0)
