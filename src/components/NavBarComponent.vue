@@ -1,5 +1,5 @@
 <template>
-   <div>
+   <div class="">
       <div class=" flex justify-between relative">
 
       <div v-if="logoutLoading" class="h-screen w-screen bg-white bg-opacity-25 absolute z-50 flex justify-center items-center">
@@ -13,7 +13,7 @@
             class="h-screen w-screen bg-opacity-30 bg-black  absolute z-50 flex justify-center items-center">
             <div class="h-full w-full  absolute" @click="InfoCar = !InfoCar"></div>
             <div
-               class="w-5/12  bg-white  rounded-lg mx-auto z-50 flex justify-center">
+               class="w-11/12 lg:w-5/12  bg-white  rounded-lg mx-auto z-50 flex justify-center">
                <div class="w-full bg-white rounded-lg shadow-md p-6">
                  <div class="w-full flex justify-between items-center">
                   <h1 class="text-2xl font-bold text-gray-800 mb-4">Détails du vehicule</h1>
@@ -48,7 +48,7 @@
             class="h-screen w-screen bg-opacity-30 bg-black  absolute z-50 flex justify-center items-center">
             <div @click="ProfileTap = !ProfileTap" class="h-full w-full  absolute"></div>
             <div
-               class="w-6/12 h-[90%] bg-white  rounded-lg mx-auto p-4 overflow-hidden space-y-3 z-50 flex flex-col justify-center">
+               class="w-11/12 lg:w-6/12 h-[90%] bg-white  rounded-lg mx-auto p-4 overflow-hidden space-y-3 z-50 flex flex-col justify-center">
                <div class=" w-full h-[30%]   rounded space-y-3">
                      <div class="flex space-x-4 items-center justify-between">
                         <div class="items-center justify-between flex space-x-4">
@@ -247,7 +247,7 @@
             </div>
          </div>
          <div v-if="TransactionEffec" class="h-screen w-screen absolute z-[400] flex justify-center items-center">
-            <div @click="TransactionEffec = !TransactionEffec" class="w-full h-full bg-black bg-opacity-30 absolute"></div>
+            <div @click="TransactionEffec = !TransactionEffec" class="w-10/12 lg:w-full h-full bg-black bg-opacity-30 absolute"></div>
             <div class="bg-white p-6 rounded-lg shadow-lg text-center w-full max-w-md z-50">
                <div class="flex justify-center mb-4">
                      <div class="bg-green-100 rounded-full p-4">
@@ -266,7 +266,7 @@
 
          <div v-if="payerTap" class="w-full h-full bg-black absolute bg-opacity-50 z-[10000] flex justify-center items-center">
             <div @click="payerTap = !payerTap" class="h-full w-full  absolute"></div>
-            <div class="bg-white p-6 rounded-lg shadow-lg w-4/12 flex flex-col justify-center items-center z-50">
+            <div class="bg-white p-6 rounded-lg shadow-lg w-10/12 lg:w-4/12 flex flex-col justify-center items-center z-50">
                   <div class="w-full">
                      <h2 class="text-2xl font-bold text-gray-800 mb-4">Résumé de la transaction</h2>
                   </div>
@@ -297,33 +297,33 @@
          </div>
 
          <div v-if="AddVehiculeTap"
-            class="h-screen w-screen bg-opacity-30 bg-black  absolute z-50 flex justify-center items-center">
+            class="h-full lg:h-screen w-screen bg-opacity-30 bg-black  absolute z-50 flex justify-center items-center">
             <div @click="AddVehiculeTap = !AddVehiculeTap" class="h-full w-full  absolute"></div>
             <div
-               class="w-6/12  bg-white  rounded-lg mx-auto p-8  space-y-3 z-50 flex flex-col ">
-               <form @submit.prevent="SaveVehicule" class=" space-y-3">
+               class="w-11/12 lg:w-6/12 h-auto bg-white  rounded-lg mx-auto p-4 lg:p-8  space-y-3 z-50 flex flex-col ">
+               <form @submit.prevent="SaveVehicule" class="">
                   <div class="border-b border-gray-900/10 ">
                         <h2 class="text-base font-semibold leading-7 text-gray-900">Enregister un vehicule</h2>
-                        <p class="mt-1 text-sm leading-6 text-gray-600">prenez soin de bien remplir tout les champs.</p>
+                        <p class="mt-px lg:mt-1 text-sm leading-6 text-gray-600">prenez soin de bien remplir tout les champs.</p>
 
-                        <div class="mt-4 grid grid-cols-1  gap-y-2 sm:grid-cols-3">
+                        <div class="mt-1 lg:mt-4 grid grid-cols-1  gap-y-2 sm:grid-cols-3">
                         <div class="sm:col-span-3">
                            <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">Marque</label>
-                           <div class="mt-2">
+                           <div class="mt-1 lg:mt-2">
                               <input type="text" required v-model="AddFormTrajet.modele" placeholder="modele" id="first-name" autocomplete="given-name" class="block w-full rounded-md outline-none border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#02356A] sm:text-sm sm:leading-6">
                            </div>
                         </div>
 
                         <div class="sm:col-span-3">
                            <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">Modele</label>
-                           <div class="mt-2">
+                           <div class="mt-1 lg:mt-2">
                               <input type="text" required v-model="AddFormTrajet.marque" placeholder="marque" id="last-name"  class="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 outline-none ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#02356A] sm:text-sm sm:leading-6">
                            </div>
                         </div>
 
                         <div class="sm:col-span-4">
                            <label for="couleur" class="block text-sm font-medium leading-6 text-gray-900">Couleur</label>
-                           <div class="mt-2">
+                           <div class="mt-1 lg:mt-2">
                               <input id="email" required v-model="AddFormTrajet.couleur" placeholder="couleur" type="text" 
                               class="block w-full rounded-md border-0 py-1.5 outline-none px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#02356A] sm:text-sm sm:leading-6">
                            </div>
@@ -333,7 +333,7 @@
                            <label for="etat"  class="block text-sm font-medium leading-6 text-gray-900">
                               Etat du vehicule
                            </label>
-                           <div class="mt-2">
+                           <div class="mt-1 lg:mt-2">
                               <select required v-model="AddFormTrajet.etat" name="" id="" class="block w-full rounded-md border-0 py-1.5 outline-none px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#02356A] sm:text-sm sm:leading-6 ">
                                         <option value="" class="w-full text-gray-300 font-semibold border-l-4 placeholder:capitalize placeholder:font-normal border-[#02356A] outline-none shadow focus:shadow-lg duration-700  h-full px-4 text-md ">Choisir un role</option>
                                         <option value="mauvaise" class="w-full font-semibold border-l-4 placeholder:capitalize placeholder:font-normal border-[#02356A] outline-none shadow focus:shadow-lg duration-700  h-full p-4 text-md ">mauvais</option>
@@ -345,14 +345,14 @@
 
                         <div class="sm:col-span-4">
                            <label for="email" class="block text-sm font-medium leading-6 text-gray-900">nombre de places</label>
-                           <div class="mt-2">
+                           <div class="mt-1 lg:mt-2">
                               <input id="email" required v-model="AddFormTrajet.nombre_places" placeholder="2" type="number"  class="block w-full rounded-md border-0 py-1.5 outline-none px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#02356A] sm:text-sm sm:leading-6">
                            </div>
                         </div>
                      
                         <div class="sm:col-span-4">
                            <label for="email" class="block text-sm font-medium leading-6 text-gray-900">nombre de portes</label>
-                           <div class="mt-2">
+                           <div class="mt-1 lg:mt-2">
                               <input id="email" required v-model="AddFormTrajet.nombre_portes" placeholder="2" type="number"  class="block w-full rounded-md border-0 py-1.5 outline-none px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#02356A] sm:text-sm sm:leading-6">
                            </div>
                         </div>
@@ -360,7 +360,7 @@
                
                         </div>
                   </div>
-                  <div class="flex justify-end items-center space-x-4">
+                  <div class="flex justify-end items-center space-x-4 mt-2">
                      <button @click="AddVehiculeTap = !AddVehiculeTap" class=" px-4 bg-red-500 py-1 text-sm font-semibold text-white rounded border border-red-500 ">
                         Annuler
                      </button>
@@ -376,16 +376,16 @@
             class="h-screen w-screen bg-opacity-30 bg-black  absolute z-50 flex justify-center items-center">
             <div @click="UpdatedUser = !UpdatedUser" class="h-full w-full  absolute"></div>
             <div
-               class="w-7/12 bg-white  rounded-lg mx-auto p-8 overflow-hidden space-y-3 z-50 flex flex-col justify-center">
+               class="w-10/12 lg:w-7/12 bg-white  rounded-lg mx-auto p-8 overflow-hidden space-y-3 z-50 flex flex-col justify-center">
                <div class="text-xl text-center text-[#02356A]">
                   <p>modifier mon profil </p>
                </div>
                
                <div class="h-1 bg-[#02356A] w-10/12 mx-auto rounded"></div>
-               <form @submit.prevent="updateUser" class=" grid grid-cols-2 gap-4 ">
+               <form @submit.prevent="updateUser" class=" sm:grid grid-cols-2 gap-4 ">
                   <div class="flex flex-col space-y-3 justify-center items-center">
                      <input @change="addAvatar" type="file" name="avatar" accept="image/*" id="avatar" class="hidden">
-                     <label for="avatar" class="w-36 h-36 cursor-pointer border-2 border-[#02356A] rounded-full flex justify-center items-center relative">
+                     <label for="avatar" class="w-20 lg:w-36 h-20 lg:h-36 cursor-pointer border-2 border-[#02356A] rounded-full flex justify-center items-center relative">
                      
                         <div v-if="preview.length > 0" class="w-full h-full overflow-hidden">
                            <img :src="preview" class="w-full h-full object-cover object-center rounded-full">
@@ -397,7 +397,7 @@
                            </svg>
                         </div>
                      </label>
-                     <div class="text-lg font-semibold">
+                     <div class="text-sm lg:text-lg font-semibold">
                         <p>Photo de Profil</p>
                      </div>
                   </div>
@@ -457,7 +457,7 @@
             class="h-screen w-screen bg-opacity-30 bg-black  absolute z-50 flex justify-center items-center">
             <div @click="DetailReservation = !DetailReservation" class="h-full w-full  absolute"></div>
             <div
-               class="w-8/12 bg-white  rounded-lg mx-auto p-8 overflow-hidden space-y-3 z-50 flex flex-col justify-center">
+               class="w-10/12 lg:w-8/12 bg-white  rounded-lg mx-auto p-8 overflow-hidden space-y-3 z-50 flex flex-col justify-center">
                <div class="text-xl text-center text-[#02356A]">
                   <p>detail de la reservation du {{ moment(reservation.created).format("DD/MM/YYYY") }}</p>
                </div>
@@ -549,7 +549,7 @@
             class="h-screen w-screen bg-opacity-30 bg-black  absolute z-50 flex justify-center items-center">
             <div @click="DetailTransaction = !DetailTransaction" class="h-full w-full  absolute"></div>
             <div
-               class="w-7/12 bg-white  rounded-lg mx-auto p-8 overflow-hidden space-y-3 z-50 flex flex-col justify-center">
+               class="w-11/12 lg:w-7/12 bg-white  rounded-lg mx-auto p-8 overflow-hidden space-y-3 z-50 flex flex-col justify-center">
                <div class="text-xl text-center text-[#02356A]">
                   <p>detail de la transaction du {{ moment(transaction.date).format("DD/MM/YYYY") }}</p>
                </div>
@@ -604,14 +604,14 @@
             class="h-screen w-screen bg-opacity-30 bg-black  absolute z-50 flex justify-center items-center">
             <div @click="FraisTap = !FraisTap" class="h-full w-full  absolute"></div>
             <div
-               class="w-6/12 bg-white  rounded-lg mx-auto p-4 overflow-hidden space-y-3 z-50 flex flex-col justify-center">
+               class="w-11/12 lg:w-6/12 bg-white  rounded-lg mx-auto p-4 overflow-hidden space-y-3 z-50 flex flex-col justify-center">
                <div class="text-xl text-center text-[#02356A]">
                   <p>frais sur les reservations</p>
                </div>
                
                <div class="h-1 bg-[#02356A] w-8/12 mx-auto"></div>
 
-               <form class="w-8/12 mx-auto space-y-2 rounded">
+               <form class="w-full lg:w-8/12 mx-auto space-y-2 rounded">
                   <div class="text-center text-sm">
                   <p>il s'agit du montant ajouté à toutes les transactions pour les réservations de covoiturage</p>
                </div>
@@ -639,7 +639,7 @@
             class="h-screen w-screen bg-opacity-30 bg-black  absolute z-50 flex justify-center items-center">
             <div @click="UserTap = !UserTap" class="h-full w-full  absolute"></div>
             <div
-               class="w-5/12 bg-white  rounded-lg mx-auto py-8 overflow-hidden space-y-3 z-50 flex flex-col justify-center">
+               class="w-10/12 lg:w-5/12 bg-white  rounded-lg mx-auto py-8 overflow-hidden space-y-3 z-50 flex flex-col justify-center">
                <div class="text-xl text-center text-[#02356A]">
                   <p>Ajouter une compte</p>
                </div>
@@ -711,7 +711,7 @@
          <div v-if="IsVehicule"
             class="h-screen w-screen bg-opacity-30 bg-black  absolute z-50 flex justify-center items-center">
             <div @click="IsVehicule = !IsVehicule" class="h-full w-full  absolute"></div>
-            <div class="w-8/12 bg-white  rounded mx-auto p-4 overflow-hidden space-y-10 z-50">
+            <div class="w-11/12 l:w-8/12 bg-white  rounded mx-auto p-4 overflow-hidden space-y-10 z-50">
                <div class="text-xl text-center text-[#02356A]">
                   <p>Informations sur le vehicule</p>
                </div>
@@ -784,7 +784,7 @@
             </div>
          </div>
 
-         <div class="h-screen w-[18%] print:w-0  print:hidden bg-white border-r flex fixed flex-col justify-between">
+         <div class="h-screen w-[14%] sm:w-[18%]  print:w-0  print:hidden bg-white border-r flex fixed flex-col justify-between items-center">
             <div>
                <div class="h-20 w-full  pt-20 flex flex-col justify-center items-center space-x-3">
                   <div class="w-16 h-16  rounded-full flex justify-center items-center ">
@@ -909,8 +909,8 @@
             </div>
          </div>
          
-         <div class="flex justify-end h-screen overflow-y-scroll w-screen overflow-x-hidden">
-            <div class="h-full w-[82%] print:w-full ">
+         <div class="flex justify-end h-screen overflow-y-scroll w-full lg:w-screen overflow-hidden">
+            <div class="h-full w-[86%] sm:w-[82%] print:w-full ">
             <div class="h-20 mb-6 w-full print:hidden flex items-center justify-center bg-[#02356A]">
                <div class="w-[95%] mx-auto  flex justify-between  ">
                   <div class="space-x-4 flex items-center">
@@ -976,7 +976,7 @@
                   </div>
                   
                   <div v-if="notif"
-                     class="max-h-96 space-y-2 shadow overflow-y-scroll w-80 p-4 rounded bg-[#02356A] absolute z-50 top-10 right-[3.9rem]">
+                     class="max-h-96 space-y-2 shadow overflow-y-scroll w-80 p-4 rounded bg-[#02356A] absolute z-50 top-16 lg:top-10 right-2 lg:right-[3.9rem]">
                      <div class="text-white">
                         <p>les notifications</p>
                      </div>

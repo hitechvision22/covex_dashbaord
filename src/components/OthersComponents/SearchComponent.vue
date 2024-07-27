@@ -4,8 +4,8 @@
             <p>recherche un voyage</p>
         </div>
         <div class="w-full ">
-            <form @submit.prevent="search" class="  flex items-center gap-6 bg-white  rounded-lg">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 w-11/12">
+            <form @submit.prevent="search" class="  flex flex-col lg:flex-row items-center gap-6 bg-white  rounded-lg">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 w-full lg:w-11/12">
                     <!-- first input -->
                     <div class="flex border rounded bg-[#02356A] items-center p-4 space-x-2">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -32,7 +32,7 @@
 
                     <!-- third input -->
                     <div class="flex border rounded text-white bg-[#02356A] items-center p-4 space-x-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 text-white">
                         <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z" clip-rule="evenodd" />
                         </svg>
 
@@ -58,7 +58,7 @@
             <div class="flex space-x-2 flex-wrap justify-center">
                 <router-link 
                 :to="{ name: 'detail', query: { id: item.id, ville_depart: item.ville_depart,heure_depart:item.heure_depart, ville_destination: item.ville_destination,prix:item.prix} }"
-                  v-for="item in results" :key="item.id" class=" w-[34%] bg-white duration-500 border hover:border-[#02356A] hover:shadow-lg rounded p-3 m-2">
+                  v-for="item in results" :key="item.id" class=" w-11/12 lg:w-[34%] bg-white duration-500 border hover:border-[#02356A] hover:shadow-lg rounded p-3 m-2">
                     <div class="flex justify-between items-center w-full">
                         <div>
                             <div class="text-lg ">
@@ -96,7 +96,7 @@
             </div>
 
             <div v-if="SearchLoading" class="flex space-x-2 flex-wrap justify-center ">
-                <div v-for="index in 15" :key="index" class=" w-[32%] bg-white duration-500 border hover:border-slate-200 hover:shadow-lg m-2 rounded p-3 ">
+                <div v-for="index in 15" :key="index" class=" w-11/12 lg:w-[32%] bg-white duration-500 border hover:border-slate-200 hover:shadow-lg m-2 rounded p-3 ">
                     <div class="flex justify-between items-center w-full">
                         <div class="space-y-1">
                             <div class="w-32 h-3 rounded bg-slate-200 animate-pulse"></div>
@@ -130,6 +130,7 @@ export default {
     methods:{
         search() {
             this.SearchLoading = true
+            this.results = []
             let data = new FormData();
            if(this.form.ville_depart.length > 0) data.append("ville_depart",this.form.ville_depart)
             data.append("ville_destination",this.form.ville_destination)

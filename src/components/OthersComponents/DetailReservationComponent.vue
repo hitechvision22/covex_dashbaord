@@ -2,7 +2,7 @@
   <div>
 
     <div v-if="isModalOpen" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-      <form @submit.prevent="AddAvis" class="bg-white p-6 rounded-lg w-1/3">
+      <form @submit.prevent="AddAvis" class="bg-white p-6 rounded-lg w-11/12 lg:w-1/3">
         <h2 class="text-xl font-bold mb-4">Votre avis sur le service de covoiturage</h2>
 
         <!-- Star Rating -->

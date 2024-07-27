@@ -1,5 +1,5 @@
 <template>
-  <div class="px-4">
+  <div class="px-1 lg:px-4">
     <div class="w-11/12 h-12 -mt-6 flex space-x-1 items-center">
       <button @click="this.$router.back()">
         <svg
@@ -18,12 +18,12 @@
       <span> retour </span>
     </div>
     <div
-      class="max-w-4xl mx-auto bg-white rounded-lg shadow-md overflow-hidden"
+      class="w-full lg:max-w-4xl mx-auto bg-white rounded-lg shadow-md overflow-hidden"
     >
       <div
         class="bg-[#02356A] p-4 text-white text-center flex space-x-2 justify-center"
       >
-        <h1 class="text-2xl font-semibold">Détail du Co-Voiturage</h1>
+        <h1 class="text-xl lg:text-2xl font-semibold">Détail du Co-Voiturage</h1>
         <h1 class="text-2xl font-semibold"></h1>
       </div>
       <div class="p-6">
@@ -31,27 +31,27 @@
         <div class="mb-6">
           <h2 class="text-xl font-semibold mb-4">Détails du Trajet</h2>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
+            <div class="flex space-x-2 lg:block lg:space-x-0">
               <label class="block text-gray-600">Départ :</label>
               <p class="text-gray-800">{{ trajet.ville_depart }}</p>
             </div>
-            <div>
+            <div class="flex space-x-2 lg:block lg:space-x-0">
               <label class="block text-gray-600">Destination :</label>
               <p class="text-gray-800">{{ trajet.ville_destination }}</p>
             </div>
-            <div>
+            <div class="flex space-x-2 lg:block lg:space-x-0">
               <label class="block text-gray-600">Date :</label>
               <p class="text-gray-800">{{ trajet.date_depart }}</p>
             </div>
-            <div>
+            <div class="flex space-x-2 lg:block lg:space-x-0">
               <label class="block text-gray-600">Heure :</label>
               <p class="text-gray-800">{{ trajet.heure_depart }}</p>
             </div>
           </div>
         </div>
 
-        <div class="bg-white  rounded-lg  text-center w-full ">
-        <h2 class="text-2xl font-bold text-gray-800 mb-4">Statut des Places</h2>
+        <div class="bg-white  rounded-lg  lg:text-center w-full ">
+        <h2 class="text-xl lg:text-2xl font-bold text-gray-800 mb-4">Statut des Places</h2>
         <div class="flex justify-center mb-4">
             <div class="flex items-center mr-4">
                 <div class="bg-[#02356A] w-8 h-8 rounded-full mr-2 flex justify-center items-center">
@@ -76,8 +76,8 @@
         <!-- Passengers -->
         <div class="bg-gray-100 flex items-center justify-center">
           <div class="bg-white rounded-lg w-full pb-6">
-            <h1 class="text-2xl font-bold mb-4">Restrictions du Chauffeur</h1>
-            <ul class="flex space-x-6 justify-center">
+            <h1 class="text-xl lg:text-2xl font-bold mb-4">Restrictions du Chauffeur</h1>
+            <ul class="flex flex-col space-y-1 lg:space-y-0 lg:space-x-6 justify-center">
               <li class="flex items-center  space-x-2">
                 <svg
                   class="w-6 h-6 text-[#02356A]"
@@ -112,8 +112,8 @@
             </ul>
           </div>
         </div>
-        <div class="w-full mx-auto p-3 bg-[#02356A] shadow-md rounded-lg mt-4">
-            <p class=" text-white text-center">
+        <div class="w-full mx-auto p-2 lg:p-3 bg-[#02356A] shadow-md rounded-lg mt-4">
+            <p class=" text-white text-center text-sm lg:text-lg">
                 cette reservation inclut un payement comptant, elle est exige pas le chauffeur pour ce trajet
             </p>
         </div>

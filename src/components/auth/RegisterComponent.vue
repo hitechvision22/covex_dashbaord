@@ -13,7 +13,7 @@
 
 
             <div v-if="codeTap" class="h-full w-full bg-black  bg-opacity-35 flex flex-col items-center  absolute z-40">
-                <form @submit.prevent="validated" class="h-44 w-4/12 bg-white rounded mt-16 p-4 space-y-3 absolute">
+                <form @submit.prevent="validated" class="h-44 w-11/12 lg:w-4/12 bg-white rounded mt-16 p-4 space-y-3 absolute">
                     <div class="font-['poppins']">
                         <p>un code de verification <br> a ete envoye sur votre adresse email</p>
                     </div>
@@ -61,7 +61,7 @@
 
                                 <div class="w-full h-11 bg-white ">
                                     <input type="text" v-model="form.name" required
-                                        class="w-full font-semibold border-l-4 placeholder:capitalize placeholder:font-normal border-[#02356A] outline-none shadow focus:shadow-lg duration-700  h-full px-4 text-md "
+                                        class="w-full font-semibold border-l-4 placeholder:capitalize placeholder:font-normal border-[#02356A] outline-none shadow-2xl focus:shadow-lg duration-700  h-full px-4 text-md "
                                         placeholder="john dow">
                                 </div>
                                 <div class="w-full h-11 bg-white ">
@@ -95,7 +95,7 @@
                                         </svg>
                                     </div>
                                 </div>
-                                <div class="w-full h-11  bg-red-500 ">
+                                <div class="w-full h-11   ">
                                     <select required v-model="form.type" name="" id="" class="w-full font-semibold border-l-4 placeholder:capitalize placeholder:font-normal border-[#02356A] outline-none shadow focus:shadow-lg duration-700  h-full px-4 text-md ">
                                         <option value=1 class="w-full font-semibold border-l-4 placeholder:capitalize placeholder:font-normal border-[#02356A] outline-none shadow focus:shadow-lg duration-700  h-full p-4 text-md ">chauffeur</option>
                                         <option value=0 class="w-full font-semibold border-l-4 placeholder:capitalize placeholder:font-normal border-[#02356A] outline-none shadow focus:shadow-lg duration-700  h-full p-4 text-md ">client</option>

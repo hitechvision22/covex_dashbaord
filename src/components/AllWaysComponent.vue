@@ -5,10 +5,10 @@
 
       <div class="w-full  mx-0 lg:mx-3  space-y-3 -mt-6 md:-mt-2">
          <div>
-            <span class="text-2xl font-semibold">Mon profil</span>
+            <span class="text-xl lg:text-2xl font-semibold">Mon profil</span>
          </div>
          <div class="items-center w-full py-2 lg:py-4 flex flex-col md:flex-row  justify-end lg:justify-between border-b-2  border-[#02356A] space-y-5 ">
-            <div class="flex space-x-3 items-center">
+            <div class="flex space-x-3  items-center w-full">
                <div class="h-20 lg:h-28 w-20 lg:w-28 rounded-full bg-[#02356A] flex justify-center items-center">
                   <span class="text-white font-semibold uppercase text-sm lg:text-lg">
                      {{ this.$store.state.user.name}}
@@ -40,17 +40,17 @@
                   </div>
                </div>
             </div>
-            <div class="mx-7 flex lg:flex-row flex-col  items-center lg:space-x-4 space-y-2">
+            <div class="mx-7 flex lg:flex-row flex-col  justify-end w-full  items-center lg:space-x-4 space-y-2 lg:space-y-0">
                <button  v-if="!this.$store.state.Isvehicule  && this.$store.state.user.type >0" @click="ShowForm"
-                    class="flex w-full justify-center space-x-2 items-center text-[#02356A]  border border-[#02356A] px-4 py-1 rounded hover:bg-[#02356A] hover:text-white duration-300">
-                    <span>enregistrer mon vehicule</span>
+                    class="flex w-full lg:w-auto justify-center space-x-2 items-center text-[#02356A]  border border-[#02356A] px-4 py-1 rounded hover:bg-[#02356A] hover:text-white duration-300">
+                    <span>Enregistrer mon vehicule</span>
                 </button>
                 <button v-else-if="this.$store.state.user.type >0" @click="MyCar"
-                    class="flex w-full justify-center space-x-2 items-center text-[#02356A]  border border-[#02356A] px-4 py-1 rounded hover:bg-[#02356A] hover:text-white duration-300">
+                    class="flex w-full lg:w-auto justify-center space-x-2 items-center text-[#02356A]  border border-[#02356A] px-4 py-1 rounded hover:bg-[#02356A] hover:text-white duration-300">
                     <span>mon vehicule</span>
                 </button>
                 <button  @click="ShowUpdatedTap"
-                    class="flex w-full space-x-2 items-center text-[#02356A]  border border-[#02356A] px-2 py-1 rounded hover:bg-[#02356A] hover:text-white duration-300">
+                    class="flex w-full  justify-center text-center items-center text-[#02356A] jsutify-center border border-[#02356A] px-2 py-1 rounded hover:bg-[#02356A] hover:text-white duration-300">
                     <span> Modifier mon profil</span>
                 </button>
             </div>
@@ -58,7 +58,7 @@
       </div>
       <div v-if="this.$store.state.user.type > 2" class="flex flex-col justify-center   py-2">
             <div
-               class=" overflow-scroll overflow-x-hidden md:min-w-[700px] xl:min-w-[800px] grid grid-cols-1 gap-5 md:grid-cols-5 lg:grid-cols-4 2xl:grid-cols-4 3xl:grid-cols-6">
+               class=" overflow-scroll overflow-x-hidden md:min-w-[700px] xl:min-w-[800px] grid grid-cols-5 gap-2 lg:gap-5 md:grid-cols-5 lg:grid-cols-4 2xl:grid-cols-4 3xl:grid-cols-6">
                <div
                   class="relative flex flex-grow !flex-row  items-center rounded-[10px]  border-[1px] border-gray-200 bg-white bg-clip-border shadow-md shadow-[#F3F3F3] dark:border-[#ffffff33] dark:!bg-navy-800 dark:text-white dark:shadow-none">
                   <div class="ml-[18px] flex h-[90px] w-auto flex-row items-center">
@@ -210,8 +210,8 @@
                </div>
             </div>
          </div>
-         <div class="grid grid-cols-3 gap-4    w-full">
-            <div class="relative flex flex-grow !flex-row  items-center rounded-[10px]  border-[1px] border-gray-200 bg-white bg-clip-border shadow-md shadow-[#F3F3F3] dark:border-[#ffffff33] dark:!bg-navy-800 dark:text-white dark:shadow-none">
+         <div class="grid grid-cols-1 lg:grid-cols-3 gap-2 lg:gap-4    w-full">
+            <div class="relative flex flex-grow !flex-row  items-center rounded-[10px]  border-[1px] border-gray-200 bg-white bg-clip-border shadow-md shadow-[#F3F3F3] dark:border-[#ffffff33] dark:!bg-navy-800 ">
                     <div class="ml-[18px] flex h-[90px] w-auto flex-row items-center">
                     <div class="rounded-full bg-lightPrimary p-3 dark:bg-navy-700">
                         <span class="flex items-center text-brand-500 dark:text-white">
@@ -269,12 +269,12 @@
                 </div>
          </div>
 
-         <div v-if="user.type > 2" class=" text-xl font-semibold pt-2">
+         <div v-if="user.type > 2" class=" text-xl font-semibold pt-2 hidden lg:block">
              <span>
                 Nos Recentes Transactions
              </span>
           </div>
-      <section v-if="user.type > 2" class="container  mx-auto">
+      <section v-if="user.type > 2" class="container  mx-auto hidden lg:block">
          <div class="flex flex-col">
             <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                   <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">

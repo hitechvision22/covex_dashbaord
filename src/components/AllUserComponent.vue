@@ -1,24 +1,25 @@
 <template>
-    <div>
-        <div id="ElementPrint" class="w-[98%] mx-auto   flex justify-between">
+    <div class="">
+        <div id="ElementPrint" class="w-full  mx-auto space-y-3 lg:space-x-0 -mt-6 print:-mt-0  flex flex-col lg:flex-row justify-between">
             <div class="text-lg font-semibold">
                 <p>Liste des utilisateurs</p>
             </div>
-            <div class="flex space-x-4 items-center print:hidden">
+            <div class="flex space-y-2 lg:space-y-1 lg:space-x-4 flex-col lg:flex-row items-center print:hidden">
                 <button @click="PrintList"
-                    class="flex space-x-2 items-center text-green-500  border border-green-500 px-4 py-1 rounded hover:bg-green-500 hover:text-white duration-300">
-                    <span>Imprimer la liste</span>
+                    class="flex space-x-2 w-full text-center justify-center items-center text-green-500  border border-green-500 px-4 py-1 rounded hover:bg-green-500 hover:text-white duration-300">
+
+                    <span class="">Imprimer la liste</span>
                 </button>
                 <button @click="SignalUser"
-                    class="flex space-x-2 items-center text-[#02356A]  border border-[#02356A] px-4 py-1 rounded hover:bg-[#02356A] hover:text-white duration-300">
-                    <span> Ajouter une utilisateur</span>
+                    class="flex space-x-2 w-full text-center justify-center items-center text-[#02356A]  border border-[#02356A] px-4 py-1 rounded hover:bg-[#02356A] hover:text-white duration-300">
+                    <span class=""> Ajouter une utilisateur</span>
                 </button>
             </div>
         </div>
         <div>
-            <section class="container px-2 mx-auto">
+            <section class="lg:container px-2 mx-auto ">
                 <div class="flex flex-col mt-6">
-                    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div class="-mx-0 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
                             <div class="overflow-hidden border border-gray-200  md:rounded-lg">
                                 <table class="min-w-full divide-y divide-gray-200 ">
@@ -32,7 +33,7 @@
                                             </th>
 
                                             <th scope="col"
-                                                class="px-12 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 ">
+                                                class="px-12 hidden lg:block py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 ">
                                                 email
                                             </th>
 
@@ -71,7 +72,7 @@
                                                     </p>
                                                 </div>
                                             </td>
-                                            <td class="px-12 py-4 text-sm font-medium whitespace-nowrap">
+                                            <td class="px-12 hidden lg:block py-4 text-sm font-medium whitespace-nowrap">
                                                 <div
                                                     class="inline px-3 py-1 text-sm font-normal text-[#02356A] rounded-full  gap-x-2  ">
                                                     {{ user.email }}
@@ -110,15 +111,15 @@
                                                 </div>
                                             </td>
 
-                                            <td class="px-4 print:hidden py-4 text-sm whitespace-nowrap flex space-x-2">
+                                            <td class="px-4 print:hidden py-4 text-sm whitespace-nowrap flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-2">
                                                 <div v-if="user.id != this.$store.state.user.id" class="block">
                                                     <button @click="DeleteUser(user)"
-                                                        class="px-3 py-1 bg-red-500 border border-red-500 hover:bg-transparent duration-500 hover:text-red-500 text-white font-semibold rounded">supprimer</button>
+                                                        class="px-3 py-1 w-full lg:w-auto bg-red-500 border border-red-500 hover:bg-transparent duration-500 hover:text-red-500 text-white font-semibold rounded">supprimer</button>
                                                 </div>
                                                 <div v-if="user.id != this.$store.state.user.id && user.verified==0"
                                                     class="block">
                                                     <button @click="certifier(user)"
-                                                        class="px-3 py-1 bg-[#02356A] border border-[#02356A] hover:bg-transparent duration-500 hover:text-[#02356A] text-white font-semibold rounded">
+                                                        class="px-3 py-1 w-full lg:w-auto bg-[#02356A] border border-[#02356A] hover:bg-transparent duration-500 hover:text-[#02356A] text-white font-semibold rounded">
                                                         certifie
                                                     </button>
                                                 </div>
@@ -127,7 +128,7 @@
                                                 <div v-if="user.id != this.$store.state.user.id && user.verified ==1"
                                                     class="block">
                                                     <button @click="Decertifier(user)"
-                                                        class="px-3 py-1 bg-[#02356A] border border-[#02356A] hover:bg-transparent duration-500 hover:text-[#02356A] text-white font-semibold rounded">
+                                                        class="px-3 py-1 w-full lg:w-auto bg-[#02356A] border border-[#02356A] hover:bg-transparent duration-500 hover:text-[#02356A] text-white font-semibold rounded">
                                                         retirer
                                                         la certification
                                                     </button>
@@ -136,7 +137,7 @@
                                                 <div
                                                     class="block">
                                                     <button  @click="Profile(user)"
-                                                        class="px-3 py-1 bg-[#02356A] border border-[#02356A] hover:bg-transparent duration-500 hover:text-[#02356A] text-white font-semibold rounded">
+                                                        class="px-3 py-1 w-full lg:w-auto bg-[#02356A] border border-[#02356A] hover:bg-transparent duration-500 hover:text-[#02356A] text-white font-semibold rounded">
                                                         profile
                                                     </button>
                                                 </div>
@@ -169,7 +170,7 @@
                                 </table>
                                 
                             </div>
-                            <pagination :data="this.$store.state.users" @pagination-change-page="getUsers"></pagination>
+                            <!-- <pagination :data="this.$store.state.users" @pagination-change-page="getUsers"></pagination> -->
                         </div>
                     </div>
                 </div>
@@ -178,10 +179,10 @@
     </div>
 </template>
 <script >
-import pagination from "laravel-vue-pagination";
+// import pagination from "laravel-vue-pagination";
 export default {
     components:{
-        pagination
+        // pagination
     },  
     
     data() {

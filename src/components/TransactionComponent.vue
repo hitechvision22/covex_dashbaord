@@ -1,13 +1,14 @@
 <template>
     <div class="relative">
-        <div id="ElementPrint"  class="w-[98%] mx-auto   flex justify-between">
+        <div id="ElementPrint" class="w-full  mx-auto space-y-3 lg:space-x-0 -mt-6 print:-mt-0  flex flex-col lg:flex-row justify-between">
             <div class="text-lg font-semibold">
-                <p>Liste des Transactions</p>
+                <p>Liste des transactions</p>
             </div>
-            <div class="flex space-x-4 items-center print:hidden">
+            <div class="flex space-y-2 lg:space-y-1 lg:space-x-4 flex-col lg:flex-row items-center print:hidden">
                 <button @click="PrintList"
-                    class="flex space-x-2 items-center text-green-500  border border-green-500 px-4 py-1 rounded hover:bg-green-500 hover:text-white duration-300">
-                    <span>Imprimer la liste</span>
+                    class="flex space-x-2 w-full text-center justify-center items-center text-green-500  border border-green-500 px-4 py-1 rounded hover:bg-green-500 hover:text-white duration-300">
+
+                    <span class="">Imprimer la liste</span>
                 </button>
             </div>
         </div>

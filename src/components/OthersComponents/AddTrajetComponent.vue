@@ -11,14 +11,14 @@
                 <button @click="AddVehicule" href="#" class="text-blue-500 hover:underline">enregistrer mon vehicule</button>
             </div>
         </div>
-        <div class="flex items-center justify-center px-12">
+        <div class="flex items-center justify-center lg:px-12">
 
             <div class="mx-auto w-full bg-white">
                 <form @submit.prevent="AddTrajet" class="space-y-5">
                     <div class="text-2xl font-semibold">
                         <p>Ajouter un trajet de co-voiturage</p>
                     </div>
-                    <div class="-mx-3 grid grid-cols-3 w-full ">
+                    <div class="-mx-3 grid grid-cols-1 gap-2 lg:grid-cols-3 w-full ">
                         <div class="w-full px-3 h-14">
                             <input type="text" v-model="form.ville_depart" required name="fName" id="fName" placeholder="ville de depart"
                                 class="w-full font-semibold border-l-4 placeholder:capitalize placeholder:font-normal border-[#02356A] outline-none shadow focus:shadow-lg duration-700  h-full px-4 text-md " />
@@ -31,9 +31,7 @@
                             <input type="text" name="fName" id="fName" required v-model="form.ville_destination" placeholder="ville de destination"
                                 class="w-full font-semibold border-l-4 placeholder:capitalize placeholder:font-normal border-[#02356A] outline-none shadow focus:shadow-lg duration-700  h-full px-4 text-md " />
                         </div>
-                    </div>
-
-                    <div class="-mx-3 grid grid-cols-3 w-full ">
+                    
                         <div class="w-full px-3 h-14">
                             <input type="text" name="fName" id="fName" required v-model="form.point_destination" placeholder="point de d'arrivee ex: tradex yassa"
                                 class="w-full font-semibold border-l-4 placeholder:capitalize placeholder:font-normal border-[#02356A] outline-none shadow focus:shadow-lg duration-700  h-full px-4 text-md " />
@@ -46,8 +44,7 @@
                             <input type="time" name="fName" id="fName" required v-model="form.heure_depart" placeholder="heure de depart"
                                 class="w-full font-semibold border-l-4 placeholder:capitalize placeholder:font-normal border-[#02356A] outline-none shadow focus:shadow-lg duration-700  h-full px-4 text-md " />
                         </div>
-                    </div>
-                    <div class="-mx-3 grid grid-cols-3 w-full ">
+                
                         <div class="w-full px-3 h-14">
                             <input type="number" name="fName" required id="fName" v-model="form.nombre_de_place" placeholder="nombre de place"
                                 class="w-full font-semibold border-l-4 placeholder:capitalize placeholder:font-normal border-[#02356A] outline-none shadow focus:shadow-lg duration-700  h-full px-4 text-md " />
@@ -59,52 +56,52 @@
                     </div>
 
 
-                    <div class="space-x-7">
-                        <div class="flex space-x-3 items-center">
-                            <span class="w-4 h-4 bg-[#02356A] rounded-full"></span>
+                    <div class="space-x-1 lg:space-x-7">
+                        <div class="flex space-x-2 lg:space-x-3 items-center">
+                            <span class="w-4 h-4 hidden lg:block bg-[#02356A] rounded-full"></span>
                             <label class="mb-3 block text-base font-medium text-[#02356A]">
                                 Accessoire de voyage
-                                <div class="text-sm text-slate-400">
+                                <div class="text-xs lg:text-sm text-slate-400">
                                         les clients de ce trajet ont-il la possibilite de venir avec des bagages?
                                 </div>
                             </label>
                         </div>
                         
-                        <div class="flex items-center space-x-6">
+                        <div class="lg:flex items-center space-y-2 lg:space-y-0 lg:space-x-6">
                             <div class="flex items-center">
-                                <input type="radio"   @change="handleRadioBagage" required name="radio1" id="radioButton1" class="h-5 w-5 accent-[#02356A] " />
-                                <label for="radioButton1"  class="pl-3 text-base font-medium text-[#02356A]">
+                                <input type="radio"   @change="handleRadioBagage" required name="radio1" id="radioButton1" class="h-3 lg:h-5 w-3 lg:w-5 accent-[#02356A] " />
+                                <label for="radioButton1"  class="pl-3 text-sm  lg:text-base font-medium text-[#02356A]">
                                     j'accepte les bagages !!!
                                 </label>
                             </div>
                             <div class="flex items-center">
-                                <input type="radio" @change="handleRadioBagage" required name="radio1" id="radioButton2" class="h-5 w-5 accent-[#02356A]" />
-                                <label for="radioButton2" class="pl-3 text-base font-medium text-[#02356A]">
+                                <input type="radio" @change="handleRadioBagage" required name="radio1" id="radioButton2" class="h-3 lg:h-5 w-3 lg:w-5 accent-[#02356A]" />
+                                <label for="radioButton2" class="pl-3 text-sm  lg:text-base font-medium text-[#02356A]">
                                     non, j'en veux pas !!!
                                 </label>
                             </div>
                         </div>
                     </div>
 
-                    <div class="space-x-7">
-                        <div class="flex space-x-3 items-center">
-                            <span class="w-4 h-4 bg-[#02356A] rounded-full"></span>
+                    <div class="space-x-1 lg:space-x-7">
+                        <div class="flex space-x-2  lg:space-x-3 items-center">
+                            <span class="w-4 h-4 hidden lg:block bg-[#02356A] rounded-full"></span>
                             <label class="mb-3 block text-base font-medium text-[#02356A]">
-                                mode de paiement
+                                Mode de paiement
                                 <div class="text-sm text-slate-400">
                                     Les reservations de ce trajet seront t'il?
                                 </div>
                             </label>
                         </div>
-                        <div class="flex items-center space-x-6">
+                        <div class="lg:flex items-center space-y-2 lg:space-y-0 lg:space-x-6">
                             <div class="flex items-center">
-                                <input type="radio" @change="handleRadioMethode" required name="radio2" id="radioButton1" class="h-5 w-5 accent-[#02356A]" />
+                                <input type="radio" @change="handleRadioMethode" required name="radio2" id="radioButton1" class="h-3 lg:h-5 w-3 lg:w-5 accent-[#02356A] " />
                                 <label for="radioButton1" class="pl-3 text-base font-medium text-[#02356A]">
                                     regler en ligne(om/momo)
                                 </label>
                             </div>
                             <div class="flex items-center">
-                                <input type="radio" @change="handleRadioMethode" required name="radio2" id="radioButton2" class="h-5 w-5 accent-[#02356A]" />
+                                <input type="radio" @change="handleRadioMethode" required name="radio2" id="radioButton2" class="h-3 lg:h-5 w-3 lg:w-5 accent-[#02356A] " />
                                 <label for="radioButton2" class="pl-3 text-base font-medium text-[#02356A]">
                                     regler comptant (payer a la fin du voyage)
                                 </label>
@@ -112,7 +109,7 @@
                         </div>
                     </div>
 
-                    <div class="flex  justify-end">
+                    <div class="flex  justify-center lg:justify-end">
                         <button type="submit"
                             class="hover:shadow-form rounded-md bg-[#02356A] py-3 px-8 text-center text-base font-semibold text-white outline-none">
                             Enregistrer et Poster
