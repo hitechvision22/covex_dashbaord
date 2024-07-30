@@ -167,6 +167,7 @@ export default {
             data.append("name", this.form.name);
             data.append("email", this.form.email);
             data.append("password", this.form.password);
+            data.append("type", this.form.type);
             this.axios.post(this.$store.state.api + 'register', data)
                 .then(({ data }) => {
                     this.loading = false

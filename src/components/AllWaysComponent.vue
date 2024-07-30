@@ -233,7 +233,7 @@
                     </div>
                     </div>
                     <div class="h-50 ml-4 flex w-auto flex-col justify-center">
-                    <p class="font-dm text-sm font-medium text-gray-600">Mes posts</p>
+                    <p class="font-dm text-sm font-medium text-gray-600">Mes trajets</p>
                     <h4 v-if="user.trajets" class="text-xl font-bold text-navy-700 dark:text-white">
                      {{ user.trajets.length }}
                     </h4>
@@ -261,7 +261,7 @@
                     </div>
                     </div>
                     <div class="h-50 ml-4 flex w-auto flex-col justify-center">
-                    <p class="font-dm text-sm font-medium text-gray-600">reservations</p>
+                    <p class="font-dm text-sm font-medium text-gray-600">Mes Reservations</p>
                     <h4 v-if="user.reservations" class="text-xl font-bold text-navy-700 dark:text-white">
                      {{ user.reservations.length }}
                     </h4>

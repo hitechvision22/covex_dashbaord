@@ -15,6 +15,7 @@ import AddTrajetComponent from "@/components/OthersComponents/AddTrajetComponent
 import DetailComponent from "@/components/DetailComponent.vue";
 import MesReservationComponent from "@/components/OthersComponents/MesReservationComponent.vue";
 import DetailReservationComponent from "@/components/OthersComponents/DetailReservationComponent.vue";
+import MesTrajetComponent from "@/components/OthersComponents/MesTrajetComponent.vue";
 
 
 const routes = [
@@ -117,6 +118,14 @@ const routes = [
         components: {
           default: NavBar,
           one: DetailReservationComponent,
+        },
+      },
+      {
+        path: "/MesTrajets",
+        name: "MesTrajets",
+        components: {
+          default: NavBar,
+          one: MesTrajetComponent,
         },
       },
     ],

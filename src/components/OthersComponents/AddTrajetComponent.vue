@@ -168,6 +168,7 @@ export default {
             .then(({ data }) => {
                 window.emitter.emit("loading",false)
                 console.log(data)
+                window.emitter.emit("Taost")
                 this.$store.state.dashbaord[2] ++
             }).catch(error => {
                 window.emitter.emit("loading",false)

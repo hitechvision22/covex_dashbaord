@@ -1,6 +1,49 @@
 <template>
-   <div class="">
-      <div class=" flex justify-between relative">
+   <div  class="">
+
+
+
+      <div v-if="TaostTap" class="fixed inset-0 z-[1502000000] flex items-center justify-center bg-black bg-opacity-50">
+         <div class="bg-white rounded-lg shadow-lg p-6 w-96">
+            <div class="flex items-center flex-col">
+            <div class="flex-shrink-0">
+               <svg class="w-8 h-8 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1.93-10.62a.75.75 0 10-1.36-.7l-2.42 4.72a.75.75 0 01-1.24 0l-1.26-1.96a.75.75 0 10-1.32.76l1.82 2.85a1.5 1.5 0 002.47 0l2.85-5.56z" clip-rule="evenodd"></path>
+               </svg>
+            </div>
+            <div class="ml-4 mt-3 text-center">
+               <h3 class="text-lg font-medium text-gray-900">Enregistrement Réussi</h3>
+               <p class="mt-2 text-sm text-gray-600">Votre enregistrement a été effectué avec succès et se trouve a la section "<strong>Mes trajets</strong>".</p>
+            </div>
+            </div>
+            <div class="mt-4">
+            <button @click="closeToast" class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-green-500 text-base font-medium text-white shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+               OK
+            </button>
+            </div>
+         </div>
+      </div>
+
+      <div class="flex justify-between relative">
+      <div v-if="SessionEnd" class="h-screen w-screen bg-white bg-opacity-25 absolute z-50 flex justify-center items-center">
+         <div class="text-center">
+            <div class="mb-4">
+               <div class="w-16 h-16 border-4 border-t-4 border-[#02356A] border-opacity-50 rounded-full mx-auto spin"></div>
+            </div>
+            <h1 class="text-2xl font-semibold text-gray-800 mb-2">Votre session a expiré</h1>
+            <p class="text-gray-600 mb-6">votre session de a ete supprimme du a votre inactivite pendant ces 30 minutes</p>
+            <button @click="redirection" class="bg-[#02356A] uppercase text-white py-3 px-6 rounded-lg shadow shadow-white hover:bg-[#02356A]transition duration-300">
+               revenir a ma page de connexion
+            </button>
+         </div>
+      </div>
+
+     <div v-if="logoutLoading" class="h-screen w-screen bg-white bg-opacity-25 absolute z-50 flex justify-center items-center">
+         <div  class="flex flex-col items-center">
+            <div class="animate-spin rounded-full h-32 w-32 border-t-4 border-[#02356A]"></div>
+            <p class="mt-4 text-lg text-[#02356A]">Déconnexion en cours, veuillez patienter...</p>
+         </div>
+      </div>
 
       <div v-if="logoutLoading" class="h-screen w-screen bg-white bg-opacity-25 absolute z-50 flex justify-center items-center">
          <div  class="flex flex-col items-center">
@@ -382,8 +425,8 @@
                </div>
                
                <div class="h-1 bg-[#02356A] w-10/12 mx-auto rounded"></div>
-               <form @submit.prevent="updateUser" class=" sm:grid grid-cols-2 gap-4 ">
-                  <div class="flex flex-col space-y-3 justify-center items-center">
+               <form @submit.prevent="updateUser" class=" flex justify-center items-center flex-col ">
+                  <!-- <div class="flex flex-col space-y-3 justify-center items-center">
                      <input @change="addAvatar" type="file" name="avatar" accept="image/*" id="avatar" class="hidden">
                      <label for="avatar" class="w-20 lg:w-36 h-20 lg:h-36 cursor-pointer border-2 border-[#02356A] rounded-full flex justify-center items-center relative">
                      
@@ -400,8 +443,8 @@
                      <div class="text-sm lg:text-lg font-semibold">
                         <p>Photo de Profil</p>
                      </div>
-                  </div>
-                  <div class="space-y-3">
+                  </div> -->
+                  <div class="space-y-3 w-8/12">
                      <div class="w-full space-y-1">
                         <div class="capitalize text-sm">
                            <p>nom</p>
@@ -858,6 +901,7 @@
                         <span>reservations</span>
                      </div>
                   </router-link>
+                  
 
                   <router-link  to="MesReservations" class="flex space-x-4  p-2 rounded   justify-center lg:justify-start   ">
                      <div class="flex items-center space-x-3">
@@ -873,6 +917,22 @@
                      </div>
                      <div class="text-md font-['roboto'] capitalize hidden md:block">
                         <span>mes reservations</span>
+                     </div>
+                  </router-link>
+                  <router-link  to="MesTrajets" class="flex space-x-4  p-2 rounded   justify-center lg:justify-start   ">
+                     <div class="flex items-center space-x-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-calendar">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+  <path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" />
+  <path d="M16 3v4" />
+  <path d="M8 3v4" />
+  <path d="M4 11h16" />
+  <path d="M11 15h1" />
+  <path d="M12 15v3" />
+</svg>
+                     </div>
+                     <div class="text-md font-['roboto'] capitalize hidden md:block">
+                        <span>mes trajets</span>
                      </div>
                   </router-link>
                   <router-link v-if="user.type > 2" to="trajets" class="flex space-x-4  p-2 rounded  justify-center lg:justify-start   ">
@@ -1058,6 +1118,7 @@ export default {
       window.emitter.off("ShowProfile")
       window.emitter.off("FormVehicule")
       window.emitter.off("showpayertap")
+      window.emitter.off("Taost")
    },
    async mounted() {
 
@@ -1072,10 +1133,10 @@ document.addEventListener('mousemove', () => {
 setInterval(() => {
   const currentTime = Date.now();
   const inactivityDuration = currentTime - lastActivityTime;
+  console.log(inactivityDuration)
 
    if (inactivityDuration > 1800000) { 
-      localStorage.removeItem('jwtToken');
-      this.$router.push('/');
+      this.SessionEnd = true
    }
    }, 60000); 
 
@@ -1125,6 +1186,10 @@ setInterval(() => {
          this.AddVehiculeTap = true
       })
 
+      window.emitter.on("Taost", () => {
+         this.TaostTap = true
+      })
+
       window.emitter.on("DetailTrans", (data) => {
          this.DetailTransaction = true
          this.transaction = data
@@ -1170,6 +1235,11 @@ setInterval(() => {
             .then(({ data }) => {
                this.$store.state.dashbaord = data
                this.loading = false
+            }).catch(err => console.log(err))
+
+            this.axios.get(this.$store.state.api + "CleanData", this.$store.state.config)
+            .then(({ data }) => {
+               console.log(data)
             }).catch(err => console.log(err))
 
          this.axios.get(this.$store.state.api + "AllUsers", this.$store.state.config)
@@ -1255,7 +1325,9 @@ setInterval(() => {
          datas:"",
          TransactionEffec:false,
          InfoCar:false,
-         logoutLoading:false
+         logoutLoading:false,
+         SessionEnd:false,
+         TaostTap:false,
 
       }
    },
@@ -1275,6 +1347,11 @@ setInterval(() => {
             })
       },
 
+
+      closeToast(){
+         this.TaostTap = false
+         this.$router.push('/MesTrajets')
+      },
     
 
       submitPayment() {
@@ -1499,11 +1576,13 @@ setInterval(() => {
       },
 
 
-
-
-
       AddTrajet(){
          this.$router.push('/AjouterTrajet')
+      },
+
+      redirection(){
+         localStorage.clear();
+         this.$router.push('/');
       },
 
       logout() {
@@ -1602,6 +1681,13 @@ setInterval(() => {
    animation: wobble2 var(--uib-speed) infinite ease-in-out;
 }
 
+@keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .spin {
+      animation: spin 1s linear infinite;
+    }
+
 @keyframes spin78236 {
    0% {
       transform: rotate(0deg);
@@ -1681,6 +1767,4 @@ circle {
   stroke-dashoffset: -125px;
  }
 }
-
-
 </style>
