@@ -1,8 +1,6 @@
 <template>
    <div  class="">
 
-
-
       <div v-if="TaostTap" class="fixed inset-0 z-[1502000000] flex items-center justify-center bg-black bg-opacity-50">
          <div class="bg-white rounded-lg shadow-lg p-6 w-96">
             <div class="flex items-center flex-col">
@@ -25,7 +23,7 @@
       </div>
 
       <div class="flex justify-between relative">
-      <div v-if="SessionEnd" class="h-screen w-screen bg-white bg-opacity-25 absolute z-50 flex justify-center items-center">
+      <div v-if="SessionEnd" class="h-screen w-screen bg-white absolute z-50 flex justify-center items-center">
          <div class="text-center">
             <div class="mb-4">
                <div class="w-16 h-16 border-4 border-t-4 border-[#02356A] border-opacity-50 rounded-full mx-auto spin"></div>
@@ -919,7 +917,7 @@
                         <span>mes reservations</span>
                      </div>
                   </router-link>
-                  <router-link  to="MesTrajets" class="flex space-x-4  p-2 rounded   justify-center lg:justify-start   ">
+                  <router-link v-if="user.type > 0" to="MesTrajets" class="flex space-x-4  p-2 rounded   justify-center lg:justify-start   ">
                      <div class="flex items-center space-x-3">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-calendar">
   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -977,6 +975,37 @@
                      <span class="font-['roboto'] text-lg md:text-2xl text-white font-semibold">Tableau De Bord</span>
                   </div>
                   <div class="flex space-x-2 lg:space-x-4 items-center">
+
+                     <button v-if="user.type == 0 " class="btn-custom bg-[#02356A] text-white font-bold flex items-center justify-center transition-transform transform hover:scale-105 focus:outline-none" @click="showPopup = true">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 mr-2">
+                        <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm.53 5.47a.75.75 0 0 0-1.06 0l-3 3a.75.75 0 1 0 1.06 1.06l1.72-1.72v5.69a.75.75 0 0 0 1.5 0v-5.69l1.72 1.72a.75.75 0 1 0 1.06-1.06l-3-3Z" clip-rule="evenodd" />
+                        </svg>
+                        Devenir {{ user.type == 0 ? "chauffeur":"client" }}
+                     </button>
+
+                     <div v-if="showPopup" class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-20 h-screen w-screen">
+                     <div class="bg-white rounded-lg shadow-lg p-6 max-w-md w-full relative">
+                        <button class="absolute top-4 right-4 text-gray-600 hover:text-gray-800 transition-colors" @click="showPopup = false">
+                           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                        </button>
+                        <h2 class="text-xl font-semibold text-gray-800 mb-4">Devenir {{ user.type == 0 ? "chauffeur":"client" }}</h2>
+                        <p class="text-gray-600 mb-6">En cliquant sur ce bouton, vous pouvez passer au statut de {{ user.type == 0 ? "chauffeur":"client" }}. Cela vous permettra de proposer des trajets et de gérer vos réservations de manière efficace.</p>
+                        <div v-if="TypeLoading" class="flex justify-center items-center">
+                           <div class="flex items-center justify-center space-x-2">
+                              <div class="w-8 h-8 border-t-4 border-[#02356A] border-solid rounded-full animate-spin"></div>
+                           </div>
+                        </div>
+                        <div v-else class="flex justify-end space-x-4">
+                           <button class="bg-[#02356A] text-white py-2 px-4 rounded-lg shadow-sm hover:bg-[#022a4f] transition-colors" @click="ChangeType">Valider</button>
+                           <button class="bg-gray-200 text-gray-800 py-2 px-4 rounded-lg shadow-sm hover:bg-gray-300 transition-colors" @click="showPopup = false">Fermer</button>
+                        </div>
+                        
+                     </div>
+                     </div>
+
+
+
+
 
                      <button v-if="this.$store.state.user.type > 0" @click="AddTrajet"  class="space-x-2 p-1 flex items-center text-white border border-white rounded-full">
                         <span>
@@ -1133,12 +1162,18 @@ document.addEventListener('mousemove', () => {
 setInterval(() => {
   const currentTime = Date.now();
   const inactivityDuration = currentTime - lastActivityTime;
-  console.log(inactivityDuration)
+
 
    if (inactivityDuration > 1800000) { 
       this.SessionEnd = true
    }
    }, 60000); 
+
+   window.addEventListener('click', (event) => {
+          if (event.target.classList.contains('fixed')) {
+            this.closePopup();
+          }
+        });
 
 
       window.emitter.on("SignalUser", (data) => {
@@ -1225,6 +1260,7 @@ setInterval(() => {
             .then(({ data }) => {
                this.user = data
                this.$store.state.user = data
+               localStorage.setItem("type",data.type)
             }).catch(error => {
                if (error.response.status == 401) {
                   localStorage.clear();
@@ -1328,6 +1364,8 @@ setInterval(() => {
          logoutLoading:false,
          SessionEnd:false,
          TaostTap:false,
+         showPopup: false,
+         TypeLoading:false
 
       }
    },
@@ -1352,6 +1390,31 @@ setInterval(() => {
          this.TaostTap = false
          this.$router.push('/MesTrajets')
       },
+
+      closePopup() {
+          this.showPopup = false;
+        },
+
+        ChangeType(){
+         var type = this.user.type == 0 ? 1 : 0;
+         this.TypeLoading = true
+         let data = new FormData();
+         data.append("type",type)
+         this.axios.post(this.$store.state.api + "ChangeType/"+this.user.id,data, this.$store.state.config)
+            .then(({ data }) => {
+               this.$store.state.user.type = type
+               this.user.type = type
+               this.TypeLoading = false
+               this.closePopup()
+               localStorage.setItem("type",type)
+               type == 0 ? this.$router.push("/") :""
+               console.log(data)
+            }).catch(error => {
+               this.TypeLoading = false
+               console.log(error)
+            })
+
+        },
     
 
       submitPayment() {
@@ -1371,6 +1434,7 @@ setInterval(() => {
                this.payerLoading = false
                this.payerTap = false
                console.log(data)
+               this.payerNumber = ""
                this.TransactionEffec = true
                this.$router.push('/MesReservations')
             }).catch(error => {

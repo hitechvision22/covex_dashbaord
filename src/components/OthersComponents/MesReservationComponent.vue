@@ -24,12 +24,9 @@
                                                 <th scope="col"
                                                     class="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 ">
                                                     <button class="flex items-center gap-x-3 focus:outline-none">
-                                                        <span>trajet </span>
+                                                        <span>trajet</span>
                                                     </button>
                                                 </th>
-
-                                            
-
                                                 <th scope="col"
                                                     class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 ">
                                                     nombre de places
@@ -92,7 +89,7 @@
                                                         <button @click="ShowReserv(reservation)" class="px-4 py-2 bg-[#02356A] text-white rounded-md">
                                                             Poursuivre
                                                         </button>
-                                                        <button @click="deniedReservation(reservation.id)" class="px-4 py-2 bg-red-500 text-white rounded-md">
+                                                        <button @click="deniedReservation(reservation)" class="px-4 py-2 bg-red-500 text-white rounded-md">
                                                             Annuler
                                                         </button>
                                                         
@@ -176,7 +173,9 @@ import moment from 'moment'
         },
 
         deniedReservation(reservation) {
-            this.axios.delete(this.$store.state.api + "DeniedReservation/" + reservation.id, this.$store.state.config)
+            // let data = new FormData();
+            // // data.append("_method",'put')
+            this.axios.put(this.$store.state.api + "DeniedReservation/" + reservation.id,"", this.$store.state.config)
                 .then(({ data }) => {
                     console.log(data)
                     this.reservations.filter((item, index) => item.id == reservation.id ? this.reservations[index].status='annuler'  : "")

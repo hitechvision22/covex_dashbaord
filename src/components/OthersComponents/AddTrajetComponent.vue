@@ -95,14 +95,14 @@
                         </div>
                         <div class="lg:flex items-center space-y-2 lg:space-y-0 lg:space-x-6">
                             <div class="flex items-center">
-                                <input type="radio" @change="handleRadioMethode" required name="radio2" id="radioButton1" class="h-3 lg:h-5 w-3 lg:w-5 accent-[#02356A] " />
-                                <label for="radioButton1" class="pl-3 text-base font-medium text-[#02356A]">
+                                <input type="radio" @change="handleRadioMethode" required name="radio3" id="radioButton3" class="h-3 lg:h-5 w-3 lg:w-5 accent-[#02356A] " />
+                                <label for="radioButton3" class="pl-3 text-base font-medium text-[#02356A]">
                                     regler en ligne(om/momo)
                                 </label>
                             </div>
                             <div class="flex items-center">
-                                <input type="radio" @change="handleRadioMethode" required name="radio2" id="radioButton2" class="h-3 lg:h-5 w-3 lg:w-5 accent-[#02356A] " />
-                                <label for="radioButton2" class="pl-3 text-base font-medium text-[#02356A]">
+                                <input type="radio" @change="handleRadioMethode" required name="radio3" id="radioButton4" class="h-3 lg:h-5 w-3 lg:w-5 accent-[#02356A] " />
+                                <label for="radioButton4" class="pl-3 text-base font-medium text-[#02356A]">
                                     regler comptant (payer a la fin du voyage)
                                 </label>
                             </div>
@@ -123,15 +123,27 @@
 <script>
 export default {
   created () {
+    
     this.axios.get(this.$store.state.api + "Vehicule", this.$store.state.config)
             .then(({ data }) => {
                 if(data==false){
                     this.alertTap = true
                 }
+                
             }).catch(error => {
                 console.log(error)
             })
   },
+
+  mounted(){
+   var type = localStorage.getItem("type")
+   if(type == 0){
+    this.$router.push("/")
+   }
+
+  },
+
+  
   data () {
     return {
         form:{
@@ -143,8 +155,8 @@ export default {
             heure_depart:"",
             prix:"",
             nombre_de_place:"",
-            Mode_de_paiement:"",
-            bagage:"",
+            Mode_de_paiement:"on",
+            bagage:"on",
         },
         alertTap:false
     }
@@ -164,6 +176,7 @@ export default {
         data.append("etat",'actif')
         data.append("bagage",this.form.bagage=='on'? 1:0)
         data.append("Mode_de_paiement",this.form.Mode_de_paiement=='on'? 1:0)
+        console.log(this.form.bagage)
         this.axios.post(this.$store.state.api + "trajet",data, this.$store.state.config)
             .then(({ data }) => {
                 window.emitter.emit("loading",false)
